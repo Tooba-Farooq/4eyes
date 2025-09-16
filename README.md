@@ -1,5 +1,4 @@
-# 4eyes
-# 4Eyes Project
+# 4Eyes 
 
 A modern e-commerce web application with React frontend and Python backend.
 
