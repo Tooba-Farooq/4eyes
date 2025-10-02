@@ -1,0 +1,256 @@
+import React, { useState, useEffect, useRef } from "react";
+import { Search, ShoppingCart, User, Heart, Menu, X, ChevronDown } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import CartDrawer from "./CartDrawer";
+import SignInPrompt from "./Fav";
+
+const NavigationBar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [showSignInPrompt, setShowSignInPrompt] = useState(false);
+  const [user, setUser] = useState(null);
+  const dropdownRef = useRef();
+
+
+  useEffect(() => {
+  const storedUser = localStorage.getItem("user");
+  if (storedUser) setUser(JSON.parse(storedUser));
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    setUser(null);
+  };
+// Sample cart items (later connect with backend or context)
+  const [cartItems, setCartItems] = useState([
+    {
+      name: "Classic Aviator",
+      price: 129.99,
+      image: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=100&h=100",
+      quantity: 1,
+    },
+    {
+      name: "Modern Square Frame",
+      price: 89.99,
+      image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=100&h=100",
+      quantity: 2,
+    },
+  ]);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
+  return (
+    <>
+    <header className="bg-white shadow-lg sticky top-0 z-50">
+      <div className="container mx-auto px-4 flex items-center justify-between py-3">
+        {/* Logo */}
+        <span className="text-2xl font-bold text-gray-900">4Eyes</span>
+
+        {/* Navigation - Desktop */}
+        <nav className="hidden md:flex items-center space-x-6" ref={dropdownRef}>
+          <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+
+
+          {/* Eyeglasses with dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => toggleDropdown("eyeglasses")}
+              className="flex items-center gap-1 hover:text-blue-600"
+            >
+              Eyeglasses <ChevronDown size={16} />
+            </button>
+            {openDropdown === "eyeglasses" && (
+              <div className="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl p-4 grid grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold mb-2">Shop by Category</h4>
+                  <ul className="space-y-1">
+                    <li><Link to="/category/eyeglasses-men" className="hover:text-blue-600">Men</Link></li>
+                    <li><Link to="/category/eyeglasses-women" className="hover:text-blue-600">Women</Link></li>
+                    <li><Link to="/category/eyeglasses-kids" className="hover:text-blue-600">Kids</Link></li>
+                    <li><Link to="/category/eyeglasses-best-sellers" className="hover:text-blue-600">Best Sellers</Link></li>
+                    <li><Link to="/category/eyeglasses-new-arrivals" className="hover:text-blue-600">New Arrivals</Link></li>
+                    <li><Link to="/category/eyeglasses-all" className="hover:text-blue-600">Browse All</Link></li>
+                  </ul>
+
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Shop by Lens</h4>
+                  <ul className="space-y-1">
+                    <li><Link to="/category/eyeglasses-polarized" className="hover:text-blue-600">Polarized</Link></li>
+                    <li><Link to="/category/eyeglasses-prescription" className="hover:text-blue-600">Prescription</Link></li>
+                    <li><Link to="/category/eyeglasses-progressive" className="hover:text-blue-600">Progressive</Link></li>
+                    <li><Link to="/category/eyeglasses-lenses-all" className="hover:text-blue-600">View All Lens Types</Link></li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Sunglasses with dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => toggleDropdown("sunglasses")}
+              className="flex items-center gap-1 hover:text-blue-600"
+            >
+              Sunglasses <ChevronDown size={16} />
+            </button>
+            {openDropdown === "sunglasses" && (
+              <div className="absolute left-0 mt-2 w-64 bg-white shadow-xl rounded-2xl p-4 grid grid-cols-2 gap-4">
+                <div>
+                  <h4 className="font-semibold mb-2">Shop by Category</h4>
+                  <ul className="space-y-1">
+                    <li><Link to="/category/sunglasses-men" className="hover:text-blue-600">Men</Link></li>
+                    <li><Link to="/category/sunglasses-women" className="hover:text-blue-600">Women</Link></li>
+                    <li><Link to="/category/sunglasses-kids" className="hover:text-blue-600">Kids</Link></li>
+                    <li><Link to="/category/sunglasses-best-sellers" className="hover:text-blue-600">Best Sellers</Link></li>
+                    <li><Link to="/category/sunglasses-new-arrivals" className="hover:text-blue-600">New Arrivals</Link></li>
+                    <li><Link to="/category/sunglasses-all" className="hover:text-blue-600">Browse All</Link></li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 className="font-semibold mb-2">Shop by Lens</h4>
+                  <ul className="space-y-1">
+                    <li><Link to="/category/sunglasses-polarized" className="hover:text-blue-600">Polarized</Link></li>
+                    <li><Link to="/category/sunglasses-prescription" className="hover:text-blue-600">Prescription</Link></li>
+                    <li><Link to="/category/sunglasses-progressive" className="hover:text-blue-600">Progressive</Link></li>
+                    <li><Link to="/category/sunglasses-lenses-all" className="hover:text-blue-600">View All Lens Types</Link></li>
+                  </ul>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Link to="/category/accessories" className="text-gray-700 hover:text-blue-600">Accessories</Link>
+          <Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link>
+
+        </nav>
+        
+        {/* Search Bar */}
+            <div className="hidden md:flex flex-1 max-w-lg mx-8">
+              <div className="relative w-full">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search for glasses, brands, styles..."
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
+
+        {/* Actions */}
+        <div className="flex items-center space-x-4">
+          {user ? (
+            <div className="relative">
+              <button className="p-2 text-gray-700 hover:text-blue-600">
+                {user.name.split(" ")[0]} {/* Show first name */}
+              </button>
+              {/* Dropdown menu */}
+              <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg">
+                <button className="block w-full text-left px-4 py-2 hover:bg-gray-100">
+                  Profile
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          ) : (
+            <Link to="/login">
+              <button className="p-2 text-gray-700 hover:text-blue-600">
+                <User />
+              </button>
+            </Link>
+          )}
+
+
+          {/* Heart Button */}
+          <button
+            className="p-2 text-gray-700 hover:text-red-500 relative"
+            onClick={() => {
+              if (!user) {
+                setShowSignInPrompt(true); // Show sign-in prompt only if not logged in
+              } else {
+                console.log("Open Favourites Page"); // Later you can navigate to Favourites Page
+              }
+            }}
+          >
+            <Heart />
+          </button>
+
+          {/* Cart Button */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="p-2 text-gray-700 hover:text-blue-600 relative"
+            >
+              <ShoppingCart />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            className="md:hidden p-2 text-gray-700"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+      </div>
+
+       {/* Sign In Modal */}
+          {!user && (
+            <SignInPrompt
+              isOpen={showSignInPrompt}
+              onClose={() => setShowSignInPrompt(false)}
+            />
+          )}
+
+
+
+      {/* Mobile Menu (Optional, can add dropdowns here later) */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-t p-4">
+          <nav className="space-y-2">
+            <a href="/" className="block py-2 text-gray-700 hover:text-blue-600">Home</a>
+            <Link to="/category/eyeglasses-all" className="block py-2 text-gray-700 hover:text-blue-600">Eyeglasses</Link>
+            <Link to="/category/sunglasses-all" className="block py-2 text-gray-700 hover:text-blue-600">Sunglasses</Link>
+            <a href="#" className="block py-2 text-gray-700 hover:text-blue-600">Accessories</a>
+            <a href="/about" className="block py-2 text-gray-700 hover:text-blue-600">About</a>
+          </nav>
+        </div>
+      )}
+    </header>
+
+    {/* Cart Drawer */}
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        cartItems={cartItems}
+      />
+    </>
+  
+  );
+};
+
+export default NavigationBar;
