@@ -6,11 +6,14 @@ import AboutPage from "./Pages/About";
 import CategoryPage from "./Pages/Category";
 import CustomerServicePage from "./Pages/CustomerService";
 import ProductDetailPage from "./Pages/ProductDetail";
+import { CartProvider } from "./Context/CartContext";
 
 function App() {
   return (
     <Router>
-      <Routes>
+      <CartProvider>
+        {/* All your existing code stays here */}
+        <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
@@ -18,7 +21,8 @@ function App() {
         <Route path="/category/:name" element={<CategoryPage />} />
         <Route path="/customer-service" element={<CustomerServicePage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
-      </Routes>
+        </Routes>
+      </CartProvider>
     </Router>
   );
 }

@@ -3,14 +3,17 @@ import { Search, ShoppingCart, User, Heart, Menu, X, ChevronDown } from "lucide-
 import { useNavigate, Link } from "react-router-dom";
 import CartDrawer from "./CartDrawer";
 import SignInPrompt from "./Fav";
+import { useCart } from "../../Context/CartContext";
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isCartOpen, setIsCartOpen] = useState(false);
   const [showSignInPrompt, setShowSignInPrompt] = useState(false);
   const [user, setUser] = useState(null);
+  const { getTotalItems, openCart } = useCart();  // ADD THIS
+  const cartItemsCount = getTotalItems();  // ADD THIS
   const dropdownRef = useRef();
+
 
 
   useEffect(() => {
@@ -197,13 +200,13 @@ const NavigationBar = () => {
 
           {/* Cart Button */}
             <button
-              onClick={() => setIsCartOpen(true)}
-              className="p-2 text-gray-700 hover:text-blue-600 relative"
+              onClick={openCart}
+              className="relative p-2 hover:bg-gray-100 rounded-full transition"
             >
-              <ShoppingCart />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems.length}
+              <ShoppingCart className="w-6 h-6" />
+              {cartItemsCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                  {cartItemsCount}
                 </span>
               )}
             </button>
@@ -243,11 +246,7 @@ const NavigationBar = () => {
     </header>
 
     {/* Cart Drawer */}
-      <CartDrawer
-        isOpen={isCartOpen}
-        onClose={() => setIsCartOpen(false)}
-        cartItems={cartItems}
-      />
+      <CartDrawer />
     </>
   
   );

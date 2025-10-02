@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
+import { useCart } from "../Context/CartContext";
 
 // Dummy products (same structure as CategoryPage)
 const products = [
@@ -37,6 +38,14 @@ const products = [
 ];
 
 const ProductDetailPage = () => {
+  const { addToCart } = useCart();  // ADD THIS
+  
+    const handleAddToCart = (e) => {  // ADD THIS FUNCTION
+      e.preventDefault();
+      e.stopPropagation();
+      addToCart(product);
+    };
+
   const { id } = useParams();
   const product = products.find((p) => p.id === parseInt(id));
 
@@ -73,7 +82,10 @@ const ProductDetailPage = () => {
                 </span>
               )}
             </div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+            <button 
+              onClick={handleAddToCart}  // CHANGE THIS LINE
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
               Add to Cart
             </button>
           </div>

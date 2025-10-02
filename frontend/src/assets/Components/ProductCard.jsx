@@ -1,8 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Star, Camera } from "lucide-react";
+import { useCart } from "../../Context/CartContext";
 
 const ProductCard = ({ product }) => {
+  const { addToCart } = useCart();  // ADD THIS
+
+  const handleAddToCart = (e) => {  // ADD THIS FUNCTION
+    e.preventDefault();
+    e.stopPropagation();
+    addToCart(product);
+  };
+
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow group">
       <Link to={`/product/${product.id}`}>
@@ -51,7 +61,10 @@ const ProductCard = ({ product }) => {
                 </span>
               )}
             </div>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+            <button 
+              onClick={handleAddToCart}  // CHANGE THIS LINE
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+            >
               Add to Cart
             </button>
           </div>
