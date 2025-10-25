@@ -1,5 +1,9 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+// ✅ Step 1: when backend is ready, import axios
+// import axios from "axios";
+
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -9,20 +13,56 @@ const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Normally you'd call your backend API here
-    // For now, save dummy user to localStorage
-    const dummyUser = {
-      name: "John Doe",
-      email: email,
-    };
+    try {
+       // 🔹 [PLACEHOLDER] Replace this with real backend API
+      // Example backend call:
+      /*
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
 
-    localStorage.setItem("user", JSON.stringify(dummyUser));
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
 
-    // Redirect to home
-    navigate("/");
+      // Save token and user info from backend
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      */
+
+      // TEMP (dummy user until backend is ready)
+      const dummyUser = {
+        name: "John Doe",
+        email: email,
+      };
+      localStorage.setItem("user", JSON.stringify(dummyUser));
+
+      // ✅ Redirect after login
+      navigate("/");
+    } catch (error) {
+      // ✅ Step 3: handle backend errors
+      console.error("Login failed:", error);
+      alert("Invalid email or password");
+    }
   };
 
   return (
+    <>
+      <header className="bg-white shadow-lg sticky top-0 z-50">
+          <div className="container mx-auto px-4 flex items-center justify-between py-3">
+            {/* Logo */}
+            <Link to="/" className="text-2xl font-bold text-gray-900">4Eyes</Link>
+            
+            {/* Simple Home Link */}
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+            </nav>
+          </div>
+      </header>  
+
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full">
         <h1 className="text-3xl font-bold text-center mb-6">4Eyes</h1>
@@ -66,6 +106,7 @@ const Login = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

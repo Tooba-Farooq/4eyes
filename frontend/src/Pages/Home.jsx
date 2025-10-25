@@ -5,98 +5,29 @@ import Footer from '../assets/Components/Footer';
 import { Link } from "react-router-dom";
 import ProductCard from '../assets/Components/ProductCard';
 
+//Mock API
+import { getHeroSlides, getFeaturedProducts, getCategories } from "../API/homeAPI";
+
 
 const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
+  
+  const [heroSlides, setHeroSlides] = useState([]);
+  const [featuredProducts, setFeaturedProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-  // Sample data - in real app this would come from your Django API
-  const heroSlides = [
-    {
-      id: 1,
-      title: "See Yourself in Perfect Vision",
-      subtitle: "Try on glasses virtually with our advanced AR technology",
-      image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&h=600&fit=crop",
-      cta: "Try Virtual Fitting"
-    },
-    {
-      id: 2,
-      title: "Designer Frames Collection",
-      subtitle: "Premium quality eyewear from top brands worldwide",
-      image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&h=600&fit=crop",
-      cta: "Shop Collection"
-    },
-    {
-      id: 3,
-      title: "Prescription Made Easy",
-      subtitle: "Upload your prescription and get custom lenses delivered",
-      image: "https://images.unsplash.com/photo-1606811951129-e11e4d1e2d85?w=800&h=600&fit=crop",
-      cta: "Upload Prescription"
-    }
-  ];
 
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Classic Aviator",
-      price: 129.99,
-      originalPrice: 159.99,
-      image: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=400&h=300&fit=crop",
-      rating: 4.8,
-      reviews: 124,
-      tag: "Best Seller"
-    },
-    {
-      id: 2,
-      name: "Modern Square Frame",
-      price: 89.99,
-      image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=400&h=300&fit=crop",
-      rating: 4.6,
-      reviews: 89,
-      tag: "New Arrival"
-    },
-    {
-      id: 3,
-      name: "Vintage Round",
-      price: 149.99,
-      image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=400&h=300&fit=crop",
-      rating: 4.9,
-      reviews: 67,
-      tag: "Limited Edition"
-    },
-    {
-      id: 4,
-      name: "Sports Performance",
-      price: 199.99,
-      image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop",
-      rating: 4.7,
-      reviews: 156,
-      tag: "Professional"
-    }
-  ];
+  useEffect(() => {
+    // ✅ Fetch dummy data for now (will be replaced with real APIs)
+    const fetchData = async () => {
+      setHeroSlides(await getHeroSlides());
+      setFeaturedProducts(await getFeaturedProducts());
+      setCategories(await getCategories());
+    };
+    fetchData();
+  }, []);
 
-  const categories = [
-    {
-      name: "Prescription Glasses",
-      image: "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=300&h=200&fit=crop",
-      count: "500+ Styles"
-    },
-    {
-      name: "Sunglasses",
-      image: "https://images.unsplash.com/photo-1473496169904-658ba7c44d8a?w=300&h=200&fit=crop",
-      count: "300+ Styles"
-    },
-    {
-      name: "Blue Light Glasses",
-      image: "https://images.unsplash.com/photo-1606811951129-e11e4d1e2d85?w=300&h=200&fit=crop",
-      count: "200+ Styles"
-    },
-    {
-      name: "Reading Glasses",
-      image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=300&h=200&fit=crop",
-      count: "150+ Styles"
-    }
-  ];
 
   // Auto-slide carousel
   useEffect(() => {
@@ -104,7 +35,7 @@ const HomePage = () => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [heroSlides]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -117,6 +48,10 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white">
       <NavigationBar />
+
+      {/* ✅ TODO: Replace heroSlides with API response */}
+      {/* ✅ TODO: Replace featuredProducts with backend endpoint */}
+      {/* ✅ TODO: Replace categories with /api/categories once backend ready */}
 
       {/* Mobile Menu */}
         {isMenuOpen && (

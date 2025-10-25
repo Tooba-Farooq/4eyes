@@ -7,17 +7,61 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
 
-    const newUser = { name, phone, email };
-    localStorage.setItem("user", JSON.stringify(newUser));
+    try {
+      // 🔹 [PLACEHOLDER] Replace this block with your backend API call
+      /*
+      const response = await fetch("http://localhost:5000/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, phone, email, password }),
+      });
 
-    navigate("/");
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
+
+      // Save the new user (and possibly JWT token)
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      */
+
+      // 🔹 TEMPORARY DUMMY SIGNUP (for frontend testing)
+      const newUser = { name, phone, email };
+      localStorage.setItem("user", JSON.stringify(newUser));
+
+      // Navigate to homepage after signup
+      navigate("/");
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
+    <>
+    <header className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="container mx-auto px-4 flex items-center justify-between py-3">
+          {/* Logo */}
+          <Link to="/" className="text-2xl font-bold text-gray-900">4Eyes</Link>
+          
+          {/* Simple Home Link */}
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link to="/" className="text-gray-700 hover:text-blue-600">Home</Link>
+          </nav>
+        </div>
+    </header>   
+    
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="bg-white shadow-xl rounded-xl p-8 max-w-md w-full">
         <h1 className="text-3xl font-bold text-center mb-6">4Eyes</h1>
@@ -57,11 +101,16 @@ const SignUp = () => {
             required
           />
 
+          {error && (
+            <p className="text-red-500 text-sm mb-3 text-center">{error}</p>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition"
+            disabled={loading}
+            className="w-full bg-blue-600 text-white py-3 rounded-xl hover:bg-blue-700 transition disabled:opacity-50"
           >
-            Create Account
+            {loading ? "Creating Account..." : "Create Account"}
           </button>
         </form>
 
@@ -73,7 +122,9 @@ const SignUp = () => {
         </p>
       </div>
     </div>
+  </>
   );
+
 };
 
 export default SignUp;

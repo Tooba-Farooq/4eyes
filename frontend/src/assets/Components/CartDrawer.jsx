@@ -1,10 +1,11 @@
 import React from "react";
 import { X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/CartContext";
 
 const CartDrawer = () => {
   const { cartItems, isCartOpen, closeCart, removeFromCart, getTotalPrice } = useCart();  // ADD THIS
-  
+  const navigate = useNavigate();  // ADD THIS
   const total = getTotalPrice();  // ADD THIS
 
    return (
@@ -80,7 +81,13 @@ const CartDrawer = () => {
           <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
             Checkout
           </button>
-          <button className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition">
+          <button
+            onClick={() => {
+              closeCart();        // close the drawer
+              navigate("/cart");  // go to cart page
+            }}
+            className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition"
+          >
             View Cart
           </button>
         </div>

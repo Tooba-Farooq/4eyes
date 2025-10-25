@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ChevronRight, ChevronDown } from "lucide-react";
 import NavigationBar from "../assets/Components/NavigationBar";
@@ -7,7 +7,10 @@ import ProductCard from "../assets/Components/ProductCard";
 
 const CategoryPage = () => {
   const { name } = useParams();
-  const [openSections, setOpenSections] = useState({}); // Track which sections are open
+  const [openSections, setOpenSections] = useState({});
+  const [products, setProducts] = useState([]); // 🔹 dynamic product list
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const toggleSection = (section) => {
     setOpenSections((prev) => ({
@@ -16,7 +19,8 @@ const CategoryPage = () => {
     }));
   };
 
-  const products = [
+  // 🔹 Dummy data for now
+  const dummyProducts = [
     {
       id: 1,
       name: "Classic Eyeglasses",
@@ -51,13 +55,41 @@ const CategoryPage = () => {
     },
   ];
 
-  // ✅ If "view-all", show everything
-  const filteredProducts =
-    name.toLowerCase() === "view-all"
-      ? products
-      : products.filter((item) => item.category.includes(name.toLowerCase()));
+  // 🔹 [PLACEHOLDER] API integration spot
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        setError("");
 
-  // ✅ Side categories
+        // TODO: Replace this block with real backend API
+        /*
+        const response = await fetch(`http://localhost:5000/api/products?category=${name}`);
+        const data = await response.json();
+
+        if (!response.ok) throw new Error(data.message || "Failed to load products");
+
+        setProducts(data.products);
+        */
+
+        // 🔹 Temporary: use dummy data for now
+        const filtered =
+          name.toLowerCase() === "view-all"
+            ? dummyProducts
+            : dummyProducts.filter((item) =>
+                item.category.includes(name.toLowerCase())
+              );
+        setProducts(filtered);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [name]);
+
   const categories = {
     "View All": ["view-all"],
     Eyeglasses: [
@@ -91,7 +123,6 @@ const CategoryPage = () => {
             <ul className="space-y-3">
               {Object.entries(categories).map(([section, items]) => (
                 <li key={section}>
-                  {/* Section Header */}
                   <button
                     onClick={() => toggleSection(section)}
                     className="flex items-center justify-between w-full px-2 py-1 text-left font-bold text-gray-800 hover:bg-gray-100 rounded-md"
@@ -104,7 +135,6 @@ const CategoryPage = () => {
                     )}
                   </button>
 
-                  {/* Collapsible Items */}
                   {openSections[section] && (
                     <ul className="ml-4 mt-2 space-y-1">
                       {items.map((cat) => (
@@ -134,9 +164,13 @@ const CategoryPage = () => {
               {name.replace("-", " ")} Collection
             </h1>
 
-            {filteredProducts.length > 0 ? (
+            {loading ? (
+              <p className="text-center text-gray-600">Loading products...</p>
+            ) : error ? (
+              <p className="text-red-500 text-center">{error}</p>
+            ) : products.length > 0 ? (
               <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {filteredProducts.map((product) => (
+                {products.map((product) => (
                   <ProductCard key={product.id} product={product} />
                 ))}
               </div>
