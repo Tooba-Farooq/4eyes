@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect} from 'react';
+import { useNavigate } from "react-router-dom";
 import { Search, ShoppingCart, User, Heart,Menu, X, Eye, Star, ArrowRight, Camera, Shield, Truck, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from '../assets/Components/Footer';
@@ -12,11 +13,12 @@ import { getHeroSlides, getFeaturedProducts, getCategories } from "../API/homeAP
 const HomePage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSlide, setCurrentSlide] = useState(0);
-  
+
   const [heroSlides, setHeroSlides] = useState([]);
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const navigate = useNavigate();
 
   useEffect(() => {
     // ✅ Fetch dummy data for now (will be replaced with real APIs)
@@ -208,9 +210,6 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Featured Products</h2>
-            <button className="text-blue-600 hover:text-blue-700 font-semibold flex items-center">
-              View All <ArrowRight className="w-5 h-5 ml-1" />
-            </button>
           </div>
           <div className="grid md:grid-cols-4 gap-6">
             {featuredProducts.map((product) => (
@@ -234,7 +233,9 @@ const HomePage = () => {
               <Camera className="w-5 h-5 mr-2" />
               Virtual Try-On
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors"
+              onClick={() => navigate("/category/eyeglasses-all")}
+              >
               Browse Collection
             </button>
           </div>

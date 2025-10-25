@@ -9,11 +9,13 @@ import ProductDetailPage from "./Pages/ProductDetail";
 import CartPage from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import { CartProvider } from "./Context/CartContext";
+import ScrollToTop from "./assets/Components/ScrollTop";
 
 
 function App() {
   return (
     <Router>
+      <ScrollToTop /> 
       <CartProvider>
         <Routes>
         <Route path="/" element={<Home />} />
