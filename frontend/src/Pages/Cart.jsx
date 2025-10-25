@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
 import {CartContext} from "../Context/CartContext"; 
+import { useNavigate } from "react-router-dom";
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity } = useContext(CartContext);
-
+  const navigate = useNavigate(); 
   const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   return (
@@ -46,7 +47,9 @@ const CartPage = () => {
 
             <div className="flex justify-between items-center mt-6">
               <h2 className="text-2xl font-bold">Total: ${total.toFixed(2)}</h2>
-              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium">
+              <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
+                onClick={() => {
+                navigate("/checkout");}}>
                 Checkout
               </button>
             </div>

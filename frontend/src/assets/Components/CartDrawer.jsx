@@ -1,14 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/CartContext";
 
 const CartDrawer = () => {
-  const { cartItems, isCartOpen, closeCart, removeFromCart, getTotalPrice } = useCart();  // ADD THIS
-  const navigate = useNavigate();  // ADD THIS
-  const total = getTotalPrice();  // ADD THIS
+  const { cartItems, isCartOpen, closeCart, removeFromCart, getTotalPrice } = useCart();
+  const navigate = useNavigate();
+  const total = getTotalPrice();
 
-   return (
+  const [warning, setWarning] = useState(""); // ⚠️ warning state
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      setWarning("🛒 Your cart is empty! Please add items before proceeding to checkout.");
+      setTimeout(() => setWarning(""), 3000); // clear after 3s
+      return;
+    }
+    closeCart();
+    navigate("/checkout");
+  };
+
+  return (
     <div
       className={`fixed inset-0 z-50 transition-all ${
         isCartOpen ? "pointer-events-auto" : "pointer-events-none"
@@ -18,7 +30,7 @@ const CartDrawer = () => {
         className={`absolute inset-0 bg-black transition-opacity duration-300 ${
           isCartOpen ? "opacity-50" : "opacity-0"
         }`}
-        onClick={closeCart}  // CHANGE THIS
+        onClick={closeCart}
       />
 
       <div
@@ -28,7 +40,7 @@ const CartDrawer = () => {
       >
         <div className="flex justify-between items-center p-4 border-b">
           <h2 className="text-xl font-semibold">Your Cart</h2>
-          <button onClick={closeCart}>  {/* CHANGE THIS */}
+          <button onClick={closeCart}>
             <X className="w-6 h-6 text-gray-600 hover:text-black" />
           </button>
         </div>
@@ -54,7 +66,7 @@ const CartDrawer = () => {
                     <h4 className="font-semibold text-gray-800">{item.name}</h4>
                     <p className="text-gray-600 text-sm">${item.price}</p>
                   </div>
-                  <div className="flex items-center space-x-2">  {/* ADD THIS DIV */}
+                  <div className="flex items-center space-x-2">
                     <span className="text-gray-500 text-sm">
                       x{item.quantity || 1}
                     </span>
@@ -72,24 +84,38 @@ const CartDrawer = () => {
         </div>
 
         <div className="p-4 border-t space-y-2">
-          {cartItems.length > 0 && (  // ADD THIS
+          {cartItems.length > 0 && (
             <div className="flex justify-between items-center mb-2">
               <span className="font-semibold">Total:</span>
               <span className="text-xl font-bold">${total.toFixed(2)}</span>
             </div>
           )}
-          <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+
+          {/* Checkout button */}
+          <button
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition"
+            onClick={handleCheckout}
+          >
             Checkout
           </button>
+
+          {/* View Cart button */}
           <button
             onClick={() => {
-              closeCart();        // close the drawer
-              navigate("/cart");  // go to cart page
+              closeCart();
+              navigate("/cart");
             }}
             className="w-full border border-gray-300 py-3 rounded-lg hover:bg-gray-100 transition"
           >
             View Cart
           </button>
+
+          {/* Warning message */}
+          {warning && (
+            <div className="text-center text-red-500 text-sm font-medium mt-2 animate-fadeIn">
+              {warning}
+            </div>
+          )}
         </div>
       </div>
     </div>

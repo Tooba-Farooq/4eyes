@@ -17,8 +17,6 @@ const NavigationBar = () => {
   const navDropdownRef = useRef();
   const profileDropdownRef = useRef();
 
-
-
   useEffect(() => {
   const storedUser = localStorage.getItem("user");
   if (storedUser) setUser(JSON.parse(storedUser));
@@ -280,7 +278,6 @@ useEffect(() => {
             )}
           </div>
 
-
           {/* Heart Button */}
           <button
             className="p-2 text-gray-700 hover:text-red-500 relative"
@@ -317,7 +314,6 @@ useEffect(() => {
           </button>
         </div>
       
-
        {/* Sign In Modal */}
           {!user && (
             <SignInPrompt
@@ -325,8 +321,6 @@ useEffect(() => {
               onClose={() => setShowSignInPrompt(false)}
             />
           )}
-
-
 
       {/* Mobile Menu (Optional, can add dropdowns here later) */}
       {isMenuOpen && (

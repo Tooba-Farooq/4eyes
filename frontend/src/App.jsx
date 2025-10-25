@@ -7,6 +7,7 @@ import CategoryPage from "./Pages/Category";
 import CustomerServicePage from "./Pages/CustomerService";
 import ProductDetailPage from "./Pages/ProductDetail";
 import CartPage from "./Pages/Cart";
+import Checkout from "./Pages/Checkout";
 import { CartProvider } from "./Context/CartContext";
 
 
@@ -23,6 +24,7 @@ function App() {
         <Route path="/customer-service" element={<CustomerServicePage />} />
         <Route path="/product/:id" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
         </Routes>
       </CartProvider>
     </Router>
