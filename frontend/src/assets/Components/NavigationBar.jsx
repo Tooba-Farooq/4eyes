@@ -5,6 +5,8 @@ import CartDrawer from "./CartDrawer";
 import SignInPrompt from "./Fav";
 import { useCart } from "../../Context/CartContext";
 import ProfileDrawer from "./ProfileDrawer";
+import { useLocation } from "react-router-dom";
+
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +18,9 @@ const NavigationBar = () => {
   const cartItemsCount = getTotalItems();  // ADD THIS
   const navDropdownRef = useRef();
   const profileDropdownRef = useRef();
+  const location = useLocation();
+  const isCheckoutPage = location.pathname === "/checkout";
+
 
   useEffect(() => {
   const storedUser = localStorage.getItem("user");
@@ -292,18 +297,21 @@ useEffect(() => {
             <Heart />
           </button>
 
-          {/* Cart Button */}
-            <button
-              onClick={openCart}
-              className="relative p-2 hover:bg-gray-100 rounded-full transition"
-            >
-              <ShoppingCart className="w-6 h-6" />
-              {cartItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItemsCount}
-                </span>
-              )}
-            </button>
+          {/* Cart Button (hidden on Checkout page) */}
+            {!isCheckoutPage && (
+              <button
+                onClick={openCart}
+                className="relative p-2 hover:bg-gray-100 rounded-full transition"
+              >
+                <ShoppingCart className="w-6 h-6" />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </button>
+            )}
+
 
           {/* Mobile Menu Toggle */}
           <button

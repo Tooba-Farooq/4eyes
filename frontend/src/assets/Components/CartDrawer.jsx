@@ -4,16 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useCart } from "../../Context/CartContext";
 
 const CartDrawer = () => {
-  const { cartItems, isCartOpen, closeCart, removeFromCart, getTotalPrice } = useCart();
+  const { cartItems, isCartOpen, closeCart, removeFromCart, getTotalPrice, updateQuantity } = useCart();
   const navigate = useNavigate();
   const total = getTotalPrice();
 
-  const [warning, setWarning] = useState(""); // ⚠️ warning state
+  const [warning, setWarning] = useState("");
 
   const handleCheckout = () => {
     if (cartItems.length === 0) {
       setWarning("🛒 Your cart is empty! Please add items before proceeding to checkout.");
-      setTimeout(() => setWarning(""), 3000); // clear after 3s
+      setTimeout(() => setWarning(""), 3000);
       return;
     }
     closeCart();
@@ -52,9 +52,9 @@ const CartDrawer = () => {
             </p>
           ) : (
             <div className="space-y-4">
-              {cartItems.map((item, index) => (
+              {cartItems.map((item) => (
                 <div
-                  key={index}
+                  key={item.id}
                   className="flex items-center justify-between border-b pb-2"
                 >
                   <img
@@ -65,18 +65,37 @@ const CartDrawer = () => {
                   <div className="flex-1 ml-3">
                     <h4 className="font-semibold text-gray-800">{item.name}</h4>
                     <p className="text-gray-600 text-sm">${item.price}</p>
+
+                    {/* Quantity Controls */}
+                    <div className="flex items-center mt-2">
+                      <button
+                        onClick={() =>
+                          item.quantity > 1
+                            ? updateQuantity(item.id, item.quantity - 1)
+                            : removeFromCart(item.id)
+                        }
+                        className="px-2 py-1 border rounded-l bg-gray-100 hover:bg-gray-200"
+                      >
+                        -
+                      </button>
+                      <span className="px-3 border-t border-b">
+                        {item.quantity || 1}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="px-2 py-1 border rounded-r bg-gray-100 hover:bg-gray-200"
+                      >
+                        +
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex items-center space-x-2">
-                    <span className="text-gray-500 text-sm">
-                      x{item.quantity || 1}
-                    </span>
-                    <button
-                      onClick={() => removeFromCart(index)}
-                      className="text-red-500 hover:text-red-700 text-xs"
-                    >
-                      Remove
-                    </button>
-                  </div>
+
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-red-500 hover:text-red-700 text-xs ml-2"
+                  >
+                    Remove
+                  </button>
                 </div>
               ))}
             </div>

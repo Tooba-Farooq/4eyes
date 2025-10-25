@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 export const CartContext = createContext();
 
@@ -11,8 +11,23 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
+    return storedCart ? JSON.parse(storedCart) : [];
+  });
+
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    const storedCart = localStorage.getItem("cart");
+    if (storedCart) {
+      setCartItems(JSON.parse(storedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product) => {
     setCartItems((prevItems) => {
@@ -31,8 +46,25 @@ export const CartProvider = ({ children }) => {
     setIsCartOpen(true);
   };
 
-  const removeFromCart = (index) => {
-    setCartItems((prevItems) => prevItems.filter((_, i) => i !== index));
+  // Updated: Remove by ID instead of index
+  const removeFromCart = (itemId) => {
+    setCartItems((prevItems) => prevItems.filter((item) => item.id !== itemId));
+  };
+
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cart");
+  };
+
+  // Updated: Update quantity by ID instead of index
+  const updateQuantity = (itemId, newQuantity) => {
+    setCartItems((prevItems) => {
+      const updated = prevItems.map((item) =>
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   const getTotalItems = () => {
@@ -55,6 +87,8 @@ export const CartProvider = ({ children }) => {
     getTotalPrice,
     openCart,
     closeCart,
+    clearCart,
+    updateQuantity,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
