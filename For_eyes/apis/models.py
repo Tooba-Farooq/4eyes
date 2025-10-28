@@ -3,9 +3,20 @@ from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 
+
+class HeroSlide(models.Model):
+    title = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=200)
+    cta = models.CharField(max_length=50)  
+    image = models.ImageField(upload_to='hero_slides/')
+
+    def __str__(self):
+        return f"{self.title}"
+
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)  
     description = models.TextField(blank=True, null=True)
+    image = models.ImageField(upload_to='categories/', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -30,6 +41,7 @@ class Product(models.Model):
     frame_material = ArrayField(models.CharField(max_length=50), blank=True, default=list)
     color = ArrayField(models.CharField(max_length=50), blank=True, default=list)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='U')
+    tag = models.CharField(max_length=50, blank=True, null=True)
 
     is_featured = models.BooleanField(default=False)
 
@@ -38,5 +50,7 @@ class Product(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.category.name}"
+
+
 
 
