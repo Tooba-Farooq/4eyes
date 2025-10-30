@@ -102,3 +102,27 @@ ratings and reviews not implemented yet
 "image": "http://127.0.0.1:8000/media/hero_slides/prescription_glasses.jfif"
 }
 ]
+
+ProductDetail page APIs:
+
+1. GET products/<int: id>/
+
+{
+"id": 1,
+"name": "Aurum Edge",
+"description": "Sleek dual-tone eyeglasses featuring a deep black-brown plastic upper rim and a refined metallic lower frame. Designed for subtle sophistication that pairs with any look.",
+"price": "3299.00",
+"stock_status": "In stock",
+"brand": "Vincent Chase",
+"frame_material": [
+"Plastic",
+"Metal"
+],
+"color": [
+"Brown",
+"Black"
+],
+"gender": "U",
+"image": "http://127.0.0.1:8000/media/products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
+"category": "Eyeglasses"
+}
