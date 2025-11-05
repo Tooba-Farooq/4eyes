@@ -39,8 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apis',
-    'rest_framework'
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'accounts'
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -89,6 +97,8 @@ DATABASES = {
         #}
     }
 }
+
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Password validation
