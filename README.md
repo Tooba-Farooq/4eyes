@@ -55,25 +55,29 @@ ratings and reviews not implemented yet
 "id": 1,
 "name": "Aurum Edge",
 "price": "3299.00",
-"image": "http://127.0.0.1:8000/media/products/Dual-Tone_MetalPlastic_Eyeglasses.jfif"
+"image": "http://127.0.0.1:8000/media/products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
+"tag": null
 },
 {
 "id": 2,
 "name": "Solaris Goldline",
 "price": "2599.00",
-"image": "http://127.0.0.1:8000/media/products/Solaris_Goldline.jfif"
+"image": "http://127.0.0.1:8000/media/products/Solaris_Goldline.jfif",
+"tag": ""
 },
 {
 "id": 3,
 "name": "Noir Axis",
 "price": "2399.00",
-"image": "http://127.0.0.1:8000/media/products/Noir_Axis.jfif"
+"image": "http://127.0.0.1:8000/media/products/Noir_Axis.jfif",
+"tag": null
 },
 {
 "id": 4,
 "name": "Ray-Ban Eclipse",
 "price": "4499.00",
-"image": "http://127.0.0.1:8000/media/products/Ray-Ban_Eclipse.jfif"
+"image": "http://127.0.0.1:8000/media/products/Ray-Ban_Eclipse.jfif",
+"tag": null
 }
 ]
 
@@ -126,3 +130,121 @@ ProductDetail page APIs:
 "image": "http://127.0.0.1:8000/media/products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
 "category": "Eyeglasses"
 }
+
+Category page API:
+
+1. GET /apis/products/?category=Eyeglasses OR /apis/products/
+
+You can enter the tag in db from admin panel yourself.
+
+[
+{
+"id": 1,
+"name": "Aurum Edge",
+"price": "3299.00",
+"image": "http://127.0.0.1:8000/media/products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
+"tag": null
+},
+{
+"id": 9,
+"name": "Hybrid Eyeglasses",
+"price": "3200.00",
+"image": "http://127.0.0.1:8000/media/products/Hybrid_Eyeglasses.jpg",
+"tag": null
+},
+{
+"id": 15,
+"name": "CrystalEdge Transparent Glasses",
+"price": "4200.00",
+"image": "http://127.0.0.1:8000/media/products/CrystalEdge_Transparent_Glasses.webp",
+"tag": null
+},
+{
+"id": 16,
+"name": "PureRound Metal Eyeglasses",
+"price": "4600.00",
+"image": "http://127.0.0.1:8000/media/products/PureRound_Metal_Eyeglasses.jpg",
+"tag": null
+}
+]
+
+Authentication APIs
+
+1. POST http://127.0.0.1:8000/apis/auth/login/
+
+input: {
+"email": "toobafar004@gmail.com",
+"password": "mypassword123"
+}
+
+output: {
+"message": "Login successful.",
+"user": {
+"name": "",
+"email": "toobafar004@gmail.com",
+"phone": null
+},
+"tokens": {
+"refresh": "eyJh.WSmTZAONHzzroSLspFKTinP0gpatNHVe9dNVGipvo1Y",
+"access": "eyJhbGciOiJIUzIgG52wR1nuc"
+}
+}
+
+2. POST http://127.0.0.1:8000/apis/auth/register/
+
+input: {
+"name": "John Doe",
+"email": "john@example.com",
+"phone": "03001234567",
+"password": "mypassword123"
+}
+
+output: {
+"message": "Account created successfully.",
+"user": {
+"name": "John Doe",
+"email": "john@example.com",
+"phone": "03001234567"
+},
+"tokens": {
+"refresh": "eyJ0eXAiOiJKV1QiLCJh...",
+"access": "eyJ0eXAiOiJKV1QiLCJh..."
+}
+}
+
+Since token are given on register you can automatically log them in.
+
+Checkout APIs:
+
+1. POST http://127.0.0.1:8000/apis/place-order/
+   input :
+   {
+   "name": "Tooba Farooq",
+   "email": "tooba@example.com",
+   "phone": "03001234567",
+   "address": "NED University, Karachi",
+   "instructions": "Deliver between 2–4 PM",
+   "discount_code": "WELCOME10",
+   "payment_method": "cod/card",
+   "items": [
+   {
+   "product": 1,
+   "quantity": 2,
+   "price": 750
+   },
+   {
+   "product": 5,
+   "quantity": 1,
+   "price": 300
+   }
+   ]
+   }
+
+output:
+{
+"message": "Order placed successfully!",
+"order_id": 2,
+"total": 1800.0
+}
+
+Before checkout you can give user 2 options checkout as user or login to checkout faster
