@@ -1,1083 +1,1467 @@
-﻿[
-{
-  "model": "admin.logentry",
-  "pk": 1,
-  "fields": {
-    "action_time": "2025-10-30T10:03:34.676Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "1",
-    "object_repr": "Eyeglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 2,
-  "fields": {
-    "action_time": "2025-10-30T10:03:52.660Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "2",
-    "object_repr": "Sunglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 3,
-  "fields": {
-    "action_time": "2025-10-30T10:04:06.002Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "3",
-    "object_repr": "Lenses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 4,
-  "fields": {
-    "action_time": "2025-10-30T10:04:29.841Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "4",
-    "object_repr": "Sports",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 5,
-  "fields": {
-    "action_time": "2025-10-30T10:04:39.280Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "5",
-    "object_repr": "Accessories",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 6,
-  "fields": {
-    "action_time": "2025-10-30T10:10:38.494Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "1",
-    "object_repr": "See Yourself in Perfect Vision",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 7,
-  "fields": {
-    "action_time": "2025-10-30T10:11:33.580Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "2",
-    "object_repr": "Designer Frames Collection",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 8,
-  "fields": {
-    "action_time": "2025-10-30T10:12:16.963Z",
-    "user": 1,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "Prescription Made Easy",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 9,
-  "fields": {
-    "action_time": "2025-10-30T10:12:58.467Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "1",
-    "object_repr": "Eyeglasses",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 10,
-  "fields": {
-    "action_time": "2025-10-30T10:13:06.262Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "1",
-    "object_repr": "Eyeglasses",
-    "action_flag": 2,
-    "change_message": "[]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 11,
-  "fields": {
-    "action_time": "2025-10-30T10:13:35.051Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "2",
-    "object_repr": "Sunglasses",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 12,
-  "fields": {
-    "action_time": "2025-10-30T10:14:06.073Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "3",
-    "object_repr": "Lenses",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 13,
-  "fields": {
-    "action_time": "2025-10-30T10:14:32.458Z",
-    "user": 1,
-    "content_type": 6,
-    "object_id": "5",
-    "object_repr": "Accessories",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 14,
-  "fields": {
-    "action_time": "2025-10-30T10:16:20.724Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "1",
-    "object_repr": "Aurum Edge - Eyeglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 15,
-  "fields": {
-    "action_time": "2025-10-30T10:17:40.938Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "2",
-    "object_repr": "Solaris Goldline - Sunglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 16,
-  "fields": {
-    "action_time": "2025-10-30T10:19:03.007Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "3",
-    "object_repr": "Noir Axis - Sunglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 17,
-  "fields": {
-    "action_time": "2025-10-30T10:20:27.200Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "4",
-    "object_repr": "Ray-Ban Eclipse - Sunglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 18,
-  "fields": {
-    "action_time": "2025-10-30T10:21:41.996Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "5",
-    "object_repr": "Anti-Slip Glasses Arm Cover - Accessories",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 19,
-  "fields": {
-    "action_time": "2025-10-30T10:22:38.000Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "6",
-    "object_repr": "P2 Pentaplex Lens Solution (120ml) - Accessories",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 20,
-  "fields": {
-    "action_time": "2025-10-30T10:24:14.504Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "7",
-    "object_repr": "Stellar Silver Chain - Accessories",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 21,
-  "fields": {
-    "action_time": "2025-10-30T10:25:17.906Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "8",
-    "object_repr": "Azure Vision Blue Lenses - Lenses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 22,
-  "fields": {
-    "action_time": "2025-10-30T10:26:42.238Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "9",
-    "object_repr": "Hybrid Eyeglasses - Eyeglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 23,
-  "fields": {
-    "action_time": "2025-10-30T10:27:44.879Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "10",
-    "object_repr": "ProRide Sports Shades - Sports",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 24,
-  "fields": {
-    "action_time": "2025-10-30T10:28:51.661Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "11",
-    "object_repr": "BlazeGuard Basketball Goggles - Sports",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 25,
-  "fields": {
-    "action_time": "2025-10-30T10:29:53.001Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "12",
-    "object_repr": "AquaShield Swimming Goggles - Sports",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 26,
-  "fields": {
-    "action_time": "2025-10-30T10:31:02.531Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "13",
-    "object_repr": "Forest Hazel Korean Lenses - Lenses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 27,
-  "fields": {
-    "action_time": "2025-10-30T10:32:02.054Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "14",
-    "object_repr": "Ocean Blue Color Lenses - Lenses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 28,
-  "fields": {
-    "action_time": "2025-10-30T10:32:58.125Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "15",
-    "object_repr": "CrystalEdge Transparent Glasses - Eyeglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 29,
-  "fields": {
-    "action_time": "2025-10-30T10:34:09.846Z",
-    "user": 1,
-    "content_type": 8,
-    "object_id": "16",
-    "object_repr": "PureRound Metal Eyeglasses - Eyeglasses",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 1,
-  "fields": {
-    "name": "Can add log entry",
-    "content_type": 1,
-    "codename": "add_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 2,
-  "fields": {
-    "name": "Can change log entry",
-    "content_type": 1,
-    "codename": "change_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 3,
-  "fields": {
-    "name": "Can delete log entry",
-    "content_type": 1,
-    "codename": "delete_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 4,
-  "fields": {
-    "name": "Can view log entry",
-    "content_type": 1,
-    "codename": "view_logentry"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 5,
-  "fields": {
-    "name": "Can add permission",
-    "content_type": 2,
-    "codename": "add_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 6,
-  "fields": {
-    "name": "Can change permission",
-    "content_type": 2,
-    "codename": "change_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 7,
-  "fields": {
-    "name": "Can delete permission",
-    "content_type": 2,
-    "codename": "delete_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 8,
-  "fields": {
-    "name": "Can view permission",
-    "content_type": 2,
-    "codename": "view_permission"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 9,
-  "fields": {
-    "name": "Can add group",
-    "content_type": 3,
-    "codename": "add_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 10,
-  "fields": {
-    "name": "Can change group",
-    "content_type": 3,
-    "codename": "change_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 11,
-  "fields": {
-    "name": "Can delete group",
-    "content_type": 3,
-    "codename": "delete_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 12,
-  "fields": {
-    "name": "Can view group",
-    "content_type": 3,
-    "codename": "view_group"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 13,
-  "fields": {
-    "name": "Can add content type",
-    "content_type": 4,
-    "codename": "add_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 14,
-  "fields": {
-    "name": "Can change content type",
-    "content_type": 4,
-    "codename": "change_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 15,
-  "fields": {
-    "name": "Can delete content type",
-    "content_type": 4,
-    "codename": "delete_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 16,
-  "fields": {
-    "name": "Can view content type",
-    "content_type": 4,
-    "codename": "view_contenttype"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 17,
-  "fields": {
-    "name": "Can add session",
-    "content_type": 5,
-    "codename": "add_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 18,
-  "fields": {
-    "name": "Can change session",
-    "content_type": 5,
-    "codename": "change_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 19,
-  "fields": {
-    "name": "Can delete session",
-    "content_type": 5,
-    "codename": "delete_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 20,
-  "fields": {
-    "name": "Can view session",
-    "content_type": 5,
-    "codename": "view_session"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 21,
-  "fields": {
-    "name": "Can add category",
-    "content_type": 6,
-    "codename": "add_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 22,
-  "fields": {
-    "name": "Can change category",
-    "content_type": 6,
-    "codename": "change_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 23,
-  "fields": {
-    "name": "Can delete category",
-    "content_type": 6,
-    "codename": "delete_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 24,
-  "fields": {
-    "name": "Can view category",
-    "content_type": 6,
-    "codename": "view_category"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 25,
-  "fields": {
-    "name": "Can add hero slide",
-    "content_type": 7,
-    "codename": "add_heroslide"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 26,
-  "fields": {
-    "name": "Can change hero slide",
-    "content_type": 7,
-    "codename": "change_heroslide"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 27,
-  "fields": {
-    "name": "Can delete hero slide",
-    "content_type": 7,
-    "codename": "delete_heroslide"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 28,
-  "fields": {
-    "name": "Can view hero slide",
-    "content_type": 7,
-    "codename": "view_heroslide"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 29,
-  "fields": {
-    "name": "Can add product",
-    "content_type": 8,
-    "codename": "add_product"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 30,
-  "fields": {
-    "name": "Can change product",
-    "content_type": 8,
-    "codename": "change_product"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 31,
-  "fields": {
-    "name": "Can delete product",
-    "content_type": 8,
-    "codename": "delete_product"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 32,
-  "fields": {
-    "name": "Can view product",
-    "content_type": 8,
-    "codename": "view_product"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 33,
-  "fields": {
-    "name": "Can add user",
-    "content_type": 9,
-    "codename": "add_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 34,
-  "fields": {
-    "name": "Can change user",
-    "content_type": 9,
-    "codename": "change_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 35,
-  "fields": {
-    "name": "Can delete user",
-    "content_type": 9,
-    "codename": "delete_user"
-  }
-},
-{
-  "model": "auth.permission",
-  "pk": 36,
-  "fields": {
-    "name": "Can view user",
-    "content_type": 9,
-    "codename": "view_user"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 1,
-  "fields": {
-    "app_label": "admin",
-    "model": "logentry"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 2,
-  "fields": {
-    "app_label": "auth",
-    "model": "permission"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 3,
-  "fields": {
-    "app_label": "auth",
-    "model": "group"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 4,
-  "fields": {
-    "app_label": "contenttypes",
-    "model": "contenttype"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 5,
-  "fields": {
-    "app_label": "sessions",
-    "model": "session"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 6,
-  "fields": {
-    "app_label": "apis",
-    "model": "category"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 7,
-  "fields": {
-    "app_label": "apis",
-    "model": "heroslide"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 8,
-  "fields": {
-    "app_label": "apis",
-    "model": "product"
-  }
-},
-{
-  "model": "contenttypes.contenttype",
-  "pk": 9,
-  "fields": {
-    "app_label": "accounts",
-    "model": "user"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "0mnfmnivtvd3ir83qrw58oa4c7besl6h",
-  "fields": {
-    "session_data": ".eJxVjEsOAiEQBe_C2hA-LdAu3c8ZSNOAjJohmc_KeHedZBa6fVX1XiLStra4LWWOYxYXocXpd0vEjzLtIN9punXJfVrnMcldkQdd5NBzeV4P9--g0dK-NWJVKpjkMZQEGozSzjiVgrWE7EuoGnxGgIrFEANbcpnPrDEYBpPF-wO8XTdN:1vEPOt:ZM5xBwi9bHbCMnfFIDQGK8t66mVbzif4BQBhOtTmwBI",
-    "expire_date": "2025-11-13T09:56:59.633Z"
-  }
-},
-{
-  "model": "apis.heroslide",
-  "pk": 1,
-  "fields": {
-    "title": "See Yourself in Perfect Vision",
-    "subtitle": "Try on glasses virtually with our advanced AR technology",
-    "cta": "Try Virtual Fitting",
-    "image": "hero_slides/Dual-Tone_MetalPlastic_Eyeglasses.jfif"
-  }
-},
-{
-  "model": "apis.heroslide",
-  "pk": 2,
-  "fields": {
-    "title": "Designer Frames Collection",
-    "subtitle": "Premium quality eyewear from top brands worldwide",
-    "cta": "Shop Collection",
-    "image": "hero_slides/Solaris_Goldline.jfif"
-  }
-},
-{
-  "model": "apis.heroslide",
-  "pk": 3,
-  "fields": {
-    "title": "Prescription Made Easy",
-    "subtitle": "Upload your prescription and get custom lenses delivered",
-    "cta": "Upload Prescription",
-    "image": "hero_slides/prescription_glasses.jfif"
-  }
-},
-{
-  "model": "apis.category",
-  "pk": 1,
-  "fields": {
-    "name": "Eyeglasses",
-    "description": "",
-    "image": "categories/Dual-Tone_MetalPlastic_Eyeglasses.jfif"
-  }
-},
-{
-  "model": "apis.category",
-  "pk": 2,
-  "fields": {
-    "name": "Sunglasses",
-    "description": "",
-    "image": "categories/Solaris_Goldline.jfif"
-  }
-},
-{
-  "model": "apis.category",
-  "pk": 3,
-  "fields": {
-    "name": "Lenses",
-    "description": "",
-    "image": "categories/Azure_Vision_Blue_Lenses.jpg"
-  }
-},
-{
-  "model": "apis.category",
-  "pk": 4,
-  "fields": {
-    "name": "Sports",
-    "description": "",
-    "image": ""
-  }
-},
-{
-  "model": "apis.category",
-  "pk": 5,
-  "fields": {
-    "name": "Accessories",
-    "description": "",
-    "image": "categories/beaded_chain.jpeg"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 1,
-  "fields": {
-    "name": "Aurum Edge",
-    "description": "Sleek dual-tone eyeglasses featuring a deep black-brown plastic upper rim and a refined metallic lower frame. Designed for subtle sophistication that pairs with any look.",
-    "image": "products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
-    "price": "3299.00",
-    "stock": 15,
-    "category": 1,
-    "brand": "Vincent Chase",
-    "frame_material": "[\"Plastic\", \"Metal\"]",
-    "color": "[\"Brown\", \"Black\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": true,
-    "created_at": "2025-10-30T10:16:20.719Z",
-    "updated_at": "2025-10-30T10:16:20.719Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 2,
-  "fields": {
-    "name": "Solaris Goldline",
-    "description": "Round-frame sunglasses with an ultra-thin gold finish and smoke-black lenses. A vintage minimalist statement, balancing elegance with edge.",
-    "image": "products/Solaris_Goldline.jfif",
-    "price": "2599.00",
-    "stock": 20,
-    "category": 2,
-    "brand": "Fossil",
-    "frame_material": "[\"Metal\"]",
-    "color": "[\"Gold\"]",
-    "gender": "F",
-    "tag": null,
-    "is_featured": true,
-    "created_at": "2025-10-30T10:17:40.934Z",
-    "updated_at": "2025-10-30T10:17:40.934Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 3,
-  "fields": {
-    "name": "Noir Axis",
-    "description": "A bold matte-black frame with a straight top and curved lower edge, modern, confident, and built for all-day comfort.",
-    "image": "products/Noir_Axis.jfif",
-    "price": "3299.00",
-    "stock": 18,
-    "category": 2,
-    "brand": "Ray_ban",
-    "frame_material": "[\"Plastic\"]",
-    "color": "[\"Black\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": true,
-    "created_at": "2025-10-30T10:19:03.004Z",
-    "updated_at": "2025-10-30T10:19:03.004Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 4,
-  "fields": {
-    "name": "Ray-Ban Eclipse",
-    "description": "The iconic Ray-Ban silhouette reimagined, thick black frames, deep lenses, and timeless cool. Always in style, always unmistakably classic.",
-    "image": "products/Ray-Ban_Eclipse.jfif",
-    "price": "4499.00",
-    "stock": 25,
-    "category": 2,
-    "brand": "Ray_ban",
-    "frame_material": "[\"Plastic\"]",
-    "color": "[\"Black\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": true,
-    "created_at": "2025-10-30T10:20:27.196Z",
-    "updated_at": "2025-10-30T10:20:27.196Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 5,
-  "fields": {
-    "name": "Anti-Slip Glasses Arm Cover",
-    "description": "Soft, glove-like anti-slip covers that fit over the arms of glasses to prevent slipping. Perfect for everyday wear.",
-    "image": "products/Anti-Slip_Glasses_Arm_Cover.jpg",
-    "price": "250.00",
-    "stock": 30,
-    "category": 5,
-    "brand": "Generic",
-    "frame_material": "[\"Rubber\"]",
-    "color": "[\"Red\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:21:41.992Z",
-    "updated_at": "2025-10-30T10:21:41.992Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 6,
-  "fields": {
-    "name": "P2 Pentaplex Lens Solution (120ml)",
-    "description": "Multipurpose lens solution that cleans, disinfects, and stores all types of contact lenses. Ensures long-lasting comfort and clarity.",
-    "image": "products/P2_Pentaplex_Lens_Solution_120ml.webp",
-    "price": "650.00",
-    "stock": 50,
-    "category": 5,
-    "brand": "Pentaplex",
-    "frame_material": "[]",
-    "color": "[]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:22:37.996Z",
-    "updated_at": "2025-10-30T10:22:37.996Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 7,
-  "fields": {
-    "name": "Stellar Silver Chain",
-    "description": "Stylish silver chain with delicate star details that keeps your glasses secure and adds a touch of elegance.",
-    "image": "products/Stellar_Silver_Chain.jpg",
-    "price": "500.00",
-    "stock": 25,
-    "category": 5,
-    "brand": "Fashion EyeWear",
-    "frame_material": "[\"Metal\"]",
-    "color": "[\"Silver\"]",
-    "gender": "F",
-    "tag": null,
-    "is_featured": true,
-    "created_at": "2025-10-30T10:24:14.501Z",
-    "updated_at": "2025-10-30T10:24:14.501Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 8,
-  "fields": {
-    "name": "Azure Vision Blue Lenses",
-    "description": "Cosmetic blue lenses",
-    "image": "products/Azure_Vision_Blue_Lenses.jpg",
-    "price": "1500.00",
-    "stock": 40,
-    "category": 3,
-    "brand": "VisionX",
-    "frame_material": "[]",
-    "color": "[\"Blue\"]",
-    "gender": "F",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:25:17.903Z",
-    "updated_at": "2025-10-30T10:25:17.903Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 9,
-  "fields": {
-    "name": "Hybrid Eyeglasses",
-    "description": "Elegant full-rim eyeglasses featuring a sleek black plastic frame with durable metallic temples, combining comfort and sophistication.",
-    "image": "products/Hybrid_Eyeglasses.jpg",
-    "price": "3200.00",
-    "stock": 30,
-    "category": 1,
-    "brand": "OptiCraft",
-    "frame_material": "[\"Plastic\", \"Metal\"]",
-    "color": "[\"Black\"]",
-    "gender": "F",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:26:42.234Z",
-    "updated_at": "2025-10-30T10:26:42.234Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 10,
-  "fields": {
-    "name": "ProRide Sports Shades",
-    "description": "Dynamic polarized sports sunglasses with a sturdy black plastic frame. Designed for cycling, running, and outdoor adventures.",
-    "image": "products/ProRide_Sports_Shades.webp",
-    "price": "4500.00",
-    "stock": 20,
-    "category": 4,
-    "brand": "ActivLens",
-    "frame_material": "[\"Plastic\"]",
-    "color": "[\"Black\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:27:44.874Z",
-    "updated_at": "2025-10-30T10:27:44.874Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 11,
-  "fields": {
-    "name": "BlazeGuard Basketball Goggles",
-    "description": "High-impact basketball goggles featuring a bold black and orange frame with a flexible wrap-around strap for secure fit and maximum comfort during play.",
-    "image": "products/BlazeGuard_Basketball_Goggles.jpg",
-    "price": "4800.00",
-    "stock": 15,
-    "category": 4,
-    "brand": "ActivLens",
-    "frame_material": "[\"Plastic\"]",
-    "color": "[\"Orange\", \"Black\"]",
-    "gender": "U",
-    "tag": null,
-    "is_featured": false,
-    "created_at": "2025-10-30T10:28:51.657Z",
-    "updated_at": "2025-10-30T10:28:51.657Z"
-  }
-},
-{
-  "model": "apis.product",
-  "pk": 12,
-  "fields": {
-    "name": "AquaShield Swimming Goggles",
-    "description": 
+[
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2025-10-30T10:03:34.676Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "1",
+        "object_repr": "Eyeglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2025-10-30T10:03:52.660Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "2",
+        "object_repr": "Sunglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2025-10-30T10:04:06.002Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "3",
+        "object_repr": "Lenses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2025-10-30T10:04:29.841Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "4",
+        "object_repr": "Sports",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2025-10-30T10:04:39.280Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "5",
+        "object_repr": "Accessories",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2025-10-30T10:10:38.494Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "1",
+        "object_repr": "See Yourself in Perfect Vision",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2025-10-30T10:11:33.580Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "2",
+        "object_repr": "Designer Frames Collection",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2025-10-30T10:12:16.963Z",
+        "user": 1,
+        "content_type": 7,
+        "object_id": "3",
+        "object_repr": "Prescription Made Easy",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 9,
+    "fields": {
+        "action_time": "2025-10-30T10:12:58.467Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "1",
+        "object_repr": "Eyeglasses",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 10,
+    "fields": {
+        "action_time": "2025-10-30T10:13:06.262Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "1",
+        "object_repr": "Eyeglasses",
+        "action_flag": 2,
+        "change_message": "[]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 11,
+    "fields": {
+        "action_time": "2025-10-30T10:13:35.051Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "2",
+        "object_repr": "Sunglasses",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 12,
+    "fields": {
+        "action_time": "2025-10-30T10:14:06.073Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "3",
+        "object_repr": "Lenses",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 13,
+    "fields": {
+        "action_time": "2025-10-30T10:14:32.458Z",
+        "user": 1,
+        "content_type": 6,
+        "object_id": "5",
+        "object_repr": "Accessories",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Image\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 14,
+    "fields": {
+        "action_time": "2025-10-30T10:16:20.724Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "1",
+        "object_repr": "Aurum Edge - Eyeglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 15,
+    "fields": {
+        "action_time": "2025-10-30T10:17:40.938Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "2",
+        "object_repr": "Solaris Goldline - Sunglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 16,
+    "fields": {
+        "action_time": "2025-10-30T10:19:03.007Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "3",
+        "object_repr": "Noir Axis - Sunglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 17,
+    "fields": {
+        "action_time": "2025-10-30T10:20:27.200Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "4",
+        "object_repr": "Ray-Ban Eclipse - Sunglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 18,
+    "fields": {
+        "action_time": "2025-10-30T10:21:41.996Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "5",
+        "object_repr": "Anti-Slip Glasses Arm Cover - Accessories",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 19,
+    "fields": {
+        "action_time": "2025-10-30T10:22:38.000Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "6",
+        "object_repr": "P2 Pentaplex Lens Solution (120ml) - Accessories",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 20,
+    "fields": {
+        "action_time": "2025-10-30T10:24:14.504Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "7",
+        "object_repr": "Stellar Silver Chain - Accessories",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 21,
+    "fields": {
+        "action_time": "2025-10-30T10:25:17.906Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "8",
+        "object_repr": "Azure Vision Blue Lenses - Lenses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 22,
+    "fields": {
+        "action_time": "2025-10-30T10:26:42.238Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "9",
+        "object_repr": "Hybrid Eyeglasses - Eyeglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 23,
+    "fields": {
+        "action_time": "2025-10-30T10:27:44.879Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "10",
+        "object_repr": "ProRide Sports Shades - Sports",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 24,
+    "fields": {
+        "action_time": "2025-10-30T10:28:51.661Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "11",
+        "object_repr": "BlazeGuard Basketball Goggles - Sports",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 25,
+    "fields": {
+        "action_time": "2025-10-30T10:29:53.001Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "12",
+        "object_repr": "AquaShield Swimming Goggles - Sports",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 26,
+    "fields": {
+        "action_time": "2025-10-30T10:31:02.531Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "13",
+        "object_repr": "Forest Hazel Korean Lenses - Lenses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 27,
+    "fields": {
+        "action_time": "2025-10-30T10:32:02.054Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "14",
+        "object_repr": "Ocean Blue Color Lenses - Lenses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 28,
+    "fields": {
+        "action_time": "2025-10-30T10:32:58.125Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "15",
+        "object_repr": "CrystalEdge Transparent Glasses - Eyeglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 29,
+    "fields": {
+        "action_time": "2025-10-30T10:34:09.846Z",
+        "user": 1,
+        "content_type": 8,
+        "object_id": "16",
+        "object_repr": "PureRound Metal Eyeglasses - Eyeglasses",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add category",
+        "content_type": 6,
+        "codename": "add_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change category",
+        "content_type": 6,
+        "codename": "change_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete category",
+        "content_type": 6,
+        "codename": "delete_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view category",
+        "content_type": 6,
+        "codename": "view_category"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add hero slide",
+        "content_type": 7,
+        "codename": "add_heroslide"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change hero slide",
+        "content_type": 7,
+        "codename": "change_heroslide"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete hero slide",
+        "content_type": 7,
+        "codename": "delete_heroslide"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view hero slide",
+        "content_type": 7,
+        "codename": "view_heroslide"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add product",
+        "content_type": 8,
+        "codename": "add_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change product",
+        "content_type": 8,
+        "codename": "change_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete product",
+        "content_type": 8,
+        "codename": "delete_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view product",
+        "content_type": 8,
+        "codename": "view_product"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add user",
+        "content_type": 9,
+        "codename": "add_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change user",
+        "content_type": 9,
+        "codename": "change_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete user",
+        "content_type": 9,
+        "codename": "delete_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view user",
+        "content_type": 9,
+        "codename": "view_user"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add order item",
+        "content_type": 10,
+        "codename": "add_orderitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change order item",
+        "content_type": 10,
+        "codename": "change_orderitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete order item",
+        "content_type": 10,
+        "codename": "delete_orderitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view order item",
+        "content_type": 10,
+        "codename": "view_orderitem"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add order",
+        "content_type": 11,
+        "codename": "add_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change order",
+        "content_type": 11,
+        "codename": "change_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete order",
+        "content_type": 11,
+        "codename": "delete_order"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view order",
+        "content_type": 11,
+        "codename": "view_order"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "apis",
+        "model": "category"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "apis",
+        "model": "heroslide"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "apis",
+        "model": "product"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "accounts",
+        "model": "user"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "apis",
+        "model": "orderitem"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "apis",
+        "model": "order"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "21k6oaz357r8wbiolgt43zcy8se4i01m",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlle4s-Gkj5niNbeBQeQLcVJhbg7iZQC2jcz761GWpc8rk3mcWJ1UaBOv1uk9JSyA35QuVedalnmKepd0Qdteqgsr-vh_h1kanmr0UYXnA8GUjKBjedOGMjamDBhtOI7Dwx9cPHmkcQT2n5jBpjRhbP6fAHXijes:1vGSrb:DFV6kirerDvNxsECSt_UkWu_2HN9YW-V9fndY59WxsY",
+        "expire_date": "2025-11-19T02:03:07.693Z"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "ve8yxzn2z5cbrq2m9ehkklxgl9h1jo1z",
+    "fields": {
+        "session_data": ".eJxVjDsOwjAQBe_iGlle4s-Gkj5niNbeBQeQLcVJhbg7iZQC2jcz761GWpc8rk3mcWJ1UaBOv1uk9JSyA35QuVedalnmKepd0Qdteqgsr-vh_h1kanmr0UYXnA8GUjKBjedOGMjamDBhtOI7Dwx9cPHmkcQT2n5jBpjRhbP6fAHXijes:1vIIBp:4Dg4ati_vI_yUIw93444lT3j4g-QI7KyNw9u5ADeDCk",
+        "expire_date": "2025-11-24T03:03:33.455Z"
+    }
+},
+{
+    "model": "apis.heroslide",
+    "pk": 1,
+    "fields": {
+        "title": "See Yourself in Perfect Vision",
+        "subtitle": "Try on glasses virtually with our advanced AR technology",
+        "cta": "Try Virtual Fitting",
+        "image": "hero_slides/Dual-Tone_MetalPlastic_Eyeglasses.jfif"
+    }
+},
+{
+    "model": "apis.heroslide",
+    "pk": 2,
+    "fields": {
+        "title": "Designer Frames Collection",
+        "subtitle": "Premium quality eyewear from top brands worldwide",
+        "cta": "Shop Collection",
+        "image": "hero_slides/Solaris_Goldline.jfif"
+    }
+},
+{
+    "model": "apis.heroslide",
+    "pk": 3,
+    "fields": {
+        "title": "Prescription Made Easy",
+        "subtitle": "Upload your prescription and get custom lenses delivered",
+        "cta": "Upload Prescription",
+        "image": "hero_slides/prescription_glasses.jfif"
+    }
+},
+{
+    "model": "apis.category",
+    "pk": 1,
+    "fields": {
+        "name": "Eyeglasses",
+        "description": "",
+        "image": "categories/Dual-Tone_MetalPlastic_Eyeglasses.jfif"
+    }
+},
+{
+    "model": "apis.category",
+    "pk": 2,
+    "fields": {
+        "name": "Sunglasses",
+        "description": "",
+        "image": "categories/Solaris_Goldline.jfif"
+    }
+},
+{
+    "model": "apis.category",
+    "pk": 3,
+    "fields": {
+        "name": "Lenses",
+        "description": "",
+        "image": "categories/Azure_Vision_Blue_Lenses.jpg"
+    }
+},
+{
+    "model": "apis.category",
+    "pk": 4,
+    "fields": {
+        "name": "Sports",
+        "description": "",
+        "image": ""
+    }
+},
+{
+    "model": "apis.category",
+    "pk": 5,
+    "fields": {
+        "name": "Accessories",
+        "description": "",
+        "image": "categories/beaded_chain.jpeg"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 1,
+    "fields": {
+        "name": "Aurum Edge",
+        "description": "Sleek dual-tone eyeglasses featuring a deep black-brown plastic upper rim and a refined metallic lower frame. Designed for subtle sophistication that pairs with any look.",
+        "image": "products/Dual-Tone_MetalPlastic_Eyeglasses.jfif",
+        "price": "3299.00",
+        "stock": 11,
+        "category": 1,
+        "brand": "Vincent Chase",
+        "frame_material": "[\"Plastic\", \"Metal\"]",
+        "color": "[\"Brown\", \"Black\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": true,
+        "created_at": "2025-10-30T10:16:20.719Z",
+        "updated_at": "2025-11-05T01:53:52.772Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 2,
+    "fields": {
+        "name": "Solaris Goldline",
+        "description": "Round-frame sunglasses with an ultra-thin gold finish and smoke-black lenses. A vintage minimalist statement, balancing elegance with edge.",
+        "image": "products/Solaris_Goldline.jfif",
+        "price": "2599.00",
+        "stock": 20,
+        "category": 2,
+        "brand": "Fossil",
+        "frame_material": "[\"Metal\"]",
+        "color": "[\"Gold\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": true,
+        "created_at": "2025-10-30T10:17:40.934Z",
+        "updated_at": "2025-10-30T10:17:40.934Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 3,
+    "fields": {
+        "name": "Noir Axis",
+        "description": "A bold matte-black frame with a straight top and curved lower edge, modern, confident, and built for all-day comfort.",
+        "image": "products/Noir_Axis.jfif",
+        "price": "3299.00",
+        "stock": 18,
+        "category": 2,
+        "brand": "Ray_ban",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Black\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": true,
+        "created_at": "2025-10-30T10:19:03.004Z",
+        "updated_at": "2025-10-30T10:19:03.004Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 4,
+    "fields": {
+        "name": "Ray-Ban Eclipse",
+        "description": "The iconic Ray-Ban silhouette reimagined, thick black frames, deep lenses, and timeless cool. Always in style, always unmistakably classic.",
+        "image": "products/Ray-Ban_Eclipse.jfif",
+        "price": "4499.00",
+        "stock": 25,
+        "category": 2,
+        "brand": "Ray_ban",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Black\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": true,
+        "created_at": "2025-10-30T10:20:27.196Z",
+        "updated_at": "2025-10-30T10:20:27.196Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 5,
+    "fields": {
+        "name": "Anti-Slip Glasses Arm Cover",
+        "description": "Soft, glove-like anti-slip covers that fit over the arms of glasses to prevent slipping. Perfect for everyday wear.",
+        "image": "products/Anti-Slip_Glasses_Arm_Cover.jpg",
+        "price": "250.00",
+        "stock": 28,
+        "category": 5,
+        "brand": "Generic",
+        "frame_material": "[\"Rubber\"]",
+        "color": "[\"Red\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:21:41.992Z",
+        "updated_at": "2025-11-05T01:53:52.776Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 6,
+    "fields": {
+        "name": "P2 Pentaplex Lens Solution (120ml)",
+        "description": "Multipurpose lens solution that cleans, disinfects, and stores all types of contact lenses. Ensures long-lasting comfort and clarity.",
+        "image": "products/P2_Pentaplex_Lens_Solution_120ml.webp",
+        "price": "650.00",
+        "stock": 50,
+        "category": 5,
+        "brand": "Pentaplex",
+        "frame_material": "[]",
+        "color": "[]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:22:37.996Z",
+        "updated_at": "2025-10-30T10:22:37.996Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 7,
+    "fields": {
+        "name": "Stellar Silver Chain",
+        "description": "Stylish silver chain with delicate star details that keeps your glasses secure and adds a touch of elegance.",
+        "image": "products/Stellar_Silver_Chain.jpg",
+        "price": "500.00",
+        "stock": 25,
+        "category": 5,
+        "brand": "Fashion EyeWear",
+        "frame_material": "[\"Metal\"]",
+        "color": "[\"Silver\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": true,
+        "created_at": "2025-10-30T10:24:14.501Z",
+        "updated_at": "2025-10-30T10:24:14.501Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 8,
+    "fields": {
+        "name": "Azure Vision Blue Lenses",
+        "description": "Cosmetic blue lenses",
+        "image": "products/Azure_Vision_Blue_Lenses.jpg",
+        "price": "1500.00",
+        "stock": 40,
+        "category": 3,
+        "brand": "VisionX",
+        "frame_material": "[]",
+        "color": "[\"Blue\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:25:17.903Z",
+        "updated_at": "2025-10-30T10:25:17.903Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 9,
+    "fields": {
+        "name": "Hybrid Eyeglasses",
+        "description": "Elegant full-rim eyeglasses featuring a sleek black plastic frame with durable metallic temples, combining comfort and sophistication.",
+        "image": "products/Hybrid_Eyeglasses.jpg",
+        "price": "3200.00",
+        "stock": 30,
+        "category": 1,
+        "brand": "OptiCraft",
+        "frame_material": "[\"Plastic\", \"Metal\"]",
+        "color": "[\"Black\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:26:42.234Z",
+        "updated_at": "2025-10-30T10:26:42.234Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 10,
+    "fields": {
+        "name": "ProRide Sports Shades",
+        "description": "Dynamic polarized sports sunglasses with a sturdy black plastic frame. Designed for cycling, running, and outdoor adventures.",
+        "image": "products/ProRide_Sports_Shades.webp",
+        "price": "4500.00",
+        "stock": 20,
+        "category": 4,
+        "brand": "ActivLens",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Black\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:27:44.874Z",
+        "updated_at": "2025-10-30T10:27:44.874Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 11,
+    "fields": {
+        "name": "BlazeGuard Basketball Goggles",
+        "description": "High-impact basketball goggles featuring a bold black and orange frame with a flexible wrap-around strap for secure fit and maximum comfort during play.",
+        "image": "products/BlazeGuard_Basketball_Goggles.jpg",
+        "price": "4800.00",
+        "stock": 15,
+        "category": 4,
+        "brand": "ActivLens",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Orange\", \"Black\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:28:51.657Z",
+        "updated_at": "2025-10-30T10:28:51.657Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 12,
+    "fields": {
+        "name": "AquaShield Swimming Goggles",
+        "description": "Durable blue swimming goggles with a soft plastic strap for a snug, leak-proof fit δ┐»┬╜ designed for comfort and clarity underwater.",
+        "image": "products/AquaShield_Swimming_Goggles.webp",
+        "price": "3500.00",
+        "stock": 20,
+        "category": 4,
+        "brand": "ActivLens",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Blue\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:29:52.996Z",
+        "updated_at": "2025-10-30T10:29:52.996Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 13,
+    "fields": {
+        "name": "Forest Hazel Korean Lenses",
+        "description": "Subtle hazel-toned lenses inspired by natural forest hues, offering a warm, natural look with high comfort for everyday wear.",
+        "image": "products/Forest_Hazel_Korean_Lenses.webp",
+        "price": "1800.00",
+        "stock": 40,
+        "category": 3,
+        "brand": "OptiCraft",
+        "frame_material": "[]",
+        "color": "[\"Hazel\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:31:02.527Z",
+        "updated_at": "2025-10-30T10:31:02.527Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 14,
+    "fields": {
+        "name": "Ocean Blue Color Lenses",
+        "description": "Bright ocean-blue lenses that enhance your eyes with a refreshing, bold tone δ┐»┬╜ perfect for making a vibrant style statement.",
+        "image": "products/Ocean_Blue_Color_Lenses.webp",
+        "price": "1700.00",
+        "stock": 35,
+        "category": 3,
+        "brand": "OptiCraft",
+        "frame_material": "[]",
+        "color": "[\"Blue\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:32:02.047Z",
+        "updated_at": "2025-10-30T10:32:02.047Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 15,
+    "fields": {
+        "name": "CrystalEdge Transparent Glasses",
+        "description": "Minimalist rectangular eyeglasses with a crystal-clear plastic frame for a clean, modern aesthetic that suits every outfit.",
+        "image": "products/CrystalEdge_Transparent_Glasses.webp",
+        "price": "4200.00",
+        "stock": 18,
+        "category": 1,
+        "brand": "Vincent Chase",
+        "frame_material": "[]",
+        "color": "[\"Transparent\"]",
+        "gender": "U",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:32:58.121Z",
+        "updated_at": "2025-10-30T10:32:58.121Z"
+    }
+},
+{
+    "model": "apis.product",
+    "pk": 16,
+    "fields": {
+        "name": "PureRound Metal Eyeglasses",
+        "description": "Classic round-frame eyeglasses crafted with a sleek, thin metal frame δ┐»┬╜ lightweight and timelessly elegant.",
+        "image": "products/PureRound_Metal_Eyeglasses.jpg",
+        "price": "4600.00",
+        "stock": 22,
+        "category": 1,
+        "brand": "Vincent Chase",
+        "frame_material": "[\"Plastic\"]",
+        "color": "[\"Brown\"]",
+        "gender": "F",
+        "tag": null,
+        "is_featured": false,
+        "created_at": "2025-10-30T10:34:09.842Z",
+        "updated_at": "2025-10-30T10:34:09.842Z"
+    }
+},
+{
+    "model": "apis.order",
+    "pk": 1,
+    "fields": {
+        "name": "Tooba Farooq",
+        "email": "tooba@example.com",
+        "phone": "03001234567",
+        "address": "NED University, Karachi",
+        "instructions": "Deliver between 2ΓÇô4 PM",
+        "discount_code": "WELCOME10",
+        "payment_method": "cod",
+        "total_amount": "1800.00",
+        "is_paid": false,
+        "created_at": "2025-11-05T01:51:11.975Z",
+        "status": "Pending"
+    }
+},
+{
+    "model": "apis.order",
+    "pk": 2,
+    "fields": {
+        "name": "Tooba Farooq",
+        "email": "tooba@example.com",
+        "phone": "03001234567",
+        "address": "NED University, Karachi",
+        "instructions": "Deliver between 2ΓÇô4 PM",
+        "discount_code": "WELCOME10",
+        "payment_method": "card",
+        "total_amount": "1800.00",
+        "is_paid": false,
+        "created_at": "2025-11-05T01:53:52.769Z",
+        "status": "Pending"
+    }
+},
+{
+    "model": "apis.order",
+    "pk": 3,
+    "fields": {
+        "name": "Test User",
+        "email": "test@example.com",
+        "phone": "1234567890",
+        "address": "123 Test St",
+        "instructions": null,
+        "discount_code": null,
+        "payment_method": "card",
+        "total_amount": "10000.00",
+        "is_paid": false,
+        "created_at": "2025-11-10T02:35:21.697Z",
+        "status": "Awaiting Payment"
+    }
+},
+{
+    "model": "apis.order",
+    "pk": 4,
+    "fields": {
+        "name": "Test User",
+        "email": "test@example.com",
+        "phone": "1234567890",
+        "address": "123 Test St",
+        "instructions": null,
+        "discount_code": null,
+        "payment_method": "card",
+        "total_amount": "15000.00",
+        "is_paid": false,
+        "created_at": "2025-11-10T05:09:53.117Z",
+        "status": "Awaiting Payment"
+    }
+},
+{
+    "model": "apis.order",
+    "pk": 5,
+    "fields": {
+        "name": "Test User",
+        "email": "test@example.com",
+        "phone": "1234567890",
+        "address": "123 Test St",
+        "instructions": null,
+        "discount_code": null,
+        "payment_method": "card",
+        "total_amount": "20000.00",
+        "is_paid": false,
+        "created_at": "2025-11-10T05:21:49.403Z",
+        "status": "Awaiting Payment"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 1,
+    "fields": {
+        "order": 1,
+        "product": 1,
+        "quantity": 2,
+        "price": "750.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 2,
+    "fields": {
+        "order": 1,
+        "product": 5,
+        "quantity": 1,
+        "price": "300.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 3,
+    "fields": {
+        "order": 2,
+        "product": 1,
+        "quantity": 2,
+        "price": "750.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 4,
+    "fields": {
+        "order": 2,
+        "product": 5,
+        "quantity": 1,
+        "price": "300.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 5,
+    "fields": {
+        "order": 3,
+        "product": 1,
+        "quantity": 2,
+        "price": "5000.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 6,
+    "fields": {
+        "order": 4,
+        "product": 1,
+        "quantity": 3,
+        "price": "5000.00"
+    }
+},
+{
+    "model": "apis.orderitem",
+    "pk": 7,
+    "fields": {
+        "order": 5,
+        "product": 1,
+        "quantity": 4,
+        "price": "5000.00"
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 1,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$57tv9Xrzu7kr8KZdZsho7a$tqLNQ28oakUuPjGbMe/cQ/YY4y+htj1AOAewE1cFOa4=",
+        "last_login": "2025-11-10T03:03:33.440Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2025-10-30T09:56:21.932Z",
+        "email": "toobafar004@gmail.com",
+        "name": "",
+        "phone": null,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "accounts.user",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$3r59V9s0luaKvQorYQQDx0$HwjukTjyLYMUnpRRONgdcnl4dSL7AZFQ8QozbPQNUMI=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2025-11-03T01:09:43.574Z",
+        "email": "tooba@example.com",
+        "name": "Tooba Farooq",
+        "phone": "0312-1234567",
+        "groups": [],
+        "user_permissions": []
+    }
+}
+]
