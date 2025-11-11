@@ -244,7 +244,60 @@ output:
 {
 "message": "Order placed successfully!",
 "order_id": 2,
+"payment_method": "card",
 "total": 1800.0
 }
 
 Before checkout you can give user 2 options checkout as user or login to checkout faster
+
+Stripe Payment API:
+
+1. POST http://127.0.0.1:8000/apis/place-order/
+
+input:
+{
+"name": "Test User",
+"email": "test@example.com",
+"phone": "1234567890",
+"address": "123 Test St",
+"payment_method": "card",
+"items": [
+{"product": 1, "quantity": 4, "price": 5000}
+]
+}
+
+output:
+{
+"message": "Order placed successfully!",
+"order_id": 6,
+"payment_method": "card",
+"total": 20000.0
+}
+
+2. POST http://127.0.0.1:8000/apis/create-checkout-session/
+
+input:
+{
+"order_id": 6
+}
+
+output:
+{
+"url": "https://checkout.stripe.com/c/pay/cs_test_a15ODcGB4JSUl"
+}
+
+INSTRUCTIONS:
+
+1. First make a .env file with these variables
+   STRIPE*SECRET_KEY=sk_test*
+   STRIPE*PUBLISHABLE_KEY=pk_test*
+   STRIPE*WEBHOOK_SECRET=whsec*
+
+Now from stripe get secret key and publishable key and enter it
+
+2. Install Stripe CLI and enter its PATH in environment variables
+
+3. Open cmd in the directory where stripe.exe exists
+   run command stripe login and give access from browser
+   then run command stripe listen --forward-to http://127.0.0.1:8000/apis/stripe-webhook/
+   and paste the webhook in .env file and then you can use these apis do payment and check if the order status in db is updated or not.
