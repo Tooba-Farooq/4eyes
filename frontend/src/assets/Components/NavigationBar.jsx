@@ -6,33 +6,92 @@ import SignInPrompt from "./Fav";
 import { useCart } from "../../Context/CartContext";
 import ProfileDrawer from "./ProfileDrawer";
 import { useLocation } from "react-router-dom";
+import { searchProducts } from "../../API/api";
+import { useAuth } from "../../Context/AuthContext";
 
 
 const NavigationBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [showSignInPrompt, setShowSignInPrompt] = useState(false);
-  const [user, setUser] = useState(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  // Search states
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
+
+
   const { getTotalItems, openCart } = useCart();  // ADD THIS
   const cartItemsCount = getTotalItems();  // ADD THIS
   const navDropdownRef = useRef();
   const profileDropdownRef = useRef();
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout";
+  const searchRef = useRef();
+  const navigate = useNavigate();
 
+  const { user, setUser, logout } = useAuth();
 
+  // Debounced search
+useEffect(() => {
+  if (searchQuery.trim().length < 2) {
+    setSearchResults([]);
+    setShowSearchDropdown(false);
+    return;
+  }
+
+  setIsSearching(true);
+  const timer = setTimeout(async () => {
+    try {
+      const response = await searchProducts(searchQuery);
+      setSearchResults(response.data); // Axios stores JSON in `data`
+      setShowSearchDropdown(true);
+      setIsSearching(false);
+    } catch (error) {
+      console.error("Search error:", error);
+      setIsSearching(false);
+    }
+  }, 300); // 300ms delay
+
+  return () => clearTimeout(timer);
+}, [searchQuery]);
+
+  // Close search dropdown when clicking outside
   useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) setUser(JSON.parse(storedUser));
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setShowSearchDropdown(false);
+      }
+      // ... your existing outside click logic
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("user");
-    setUser(null);
-
+  const handleSearchSelect = (productId) => {
+    setShowSearchDropdown(false);
+    setSearchQuery("");
+    navigate(`/product/${productId}`);
   };
 
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      setShowSearchDropdown(false);
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
+
+
+  const handleLogout = () => {
+  localStorage.removeItem("user");
+  setUser(null);  // now this exists
+  // Optional: redirect after logout
+  navigate("/");
+  };
+  
  const toggleDropdown = (menu) => {
     setOpenDropdown(openDropdown === menu ? null : menu)};
 
@@ -176,17 +235,62 @@ useEffect(() => {
         </nav>
         
         {/* Search Bar */}
-            <div className="hidden md:flex flex-1 max-w-lg mx-8">
-              <div className="relative w-full">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <input
-                  type="text"
-                  placeholder="Search for glasses, brands, styles..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
+        {/* Search Bar with Dropdown */}
+          <div className="hidden md:flex flex-1 max-w-lg mx-8" ref={searchRef}>
+            <form onSubmit={handleSearchSubmit} className="relative w-full">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search for glasses, brands, styles..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => searchResults.length > 0 && setShowSearchDropdown(true)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
 
+              {/* Search Dropdown */}
+              {showSearchDropdown && (
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white shadow-xl rounded-lg border border-gray-200 max-h-96 overflow-y-auto z-50">
+                  {isSearching ? (
+                    <div className="p-4 text-center text-gray-500">Searching...</div>
+                  ) : searchResults.length > 0 ? (
+                    <div className="py-2">
+                      {searchResults.map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => handleSearchSelect(product.id)}
+                          className="w-full px-4 py-3 hover:bg-gray-50 flex items-center gap-3 text-left transition"
+                        >
+                          <img
+                            src={product.image}
+                            alt={product.name}
+                            className="w-12 h-12 object-cover rounded"
+                          />
+                          <div className="flex-1">
+                            <p className="font-medium text-gray-900">{product.name}</p>
+                            <p className="text-sm text-gray-500">{product.category}</p>
+                          </div>
+                          <p className="font-semibold text-blue-600">${product.price}</p>
+                        </button>
+                      ))}
+                      <Link
+                        to={`/search?q=${encodeURIComponent(searchQuery)}`}
+                        onClick={() => setShowSearchDropdown(false)}
+                        className="block px-4 py-3 text-center text-blue-600 hover:bg-gray-50 border-t"
+                      >
+                        View all results for "{searchQuery}"
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="p-4 text-center text-gray-500">
+                      No results found for "{searchQuery}"
+                    </div>
+                  )}
+                </div>
+              )}
+            </form>
+          </div>
+            
 
         {/* Actions */}
           <div
@@ -348,7 +452,6 @@ useEffect(() => {
       <ProfileDrawer
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
-        user={user}
       />
 
       {/* Cart Drawer */}

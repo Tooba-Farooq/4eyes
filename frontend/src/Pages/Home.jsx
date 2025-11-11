@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import ProductCard from '../assets/Components/ProductCard';
 
 //Mock API
-import { getHeroSlides, getFeaturedProducts, getCategories } from "../API/homeAPI";
+import { getHeroSlides, getFeaturedProducts, getCategories } from "../API/api";
 
 
 const HomePage = () => {
@@ -18,21 +18,44 @@ const HomePage = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [categories, setCategories] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    // ✅ Fetch dummy data for now (will be replaced with real APIs)
+    // Fetch data from backend API
     const fetchData = async () => {
-      setHeroSlides(await getHeroSlides());
-      setFeaturedProducts(await getFeaturedProducts());
-      setCategories(await getCategories());
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Fetch all data in parallel
+        const [heroResponse, productsResponse, categoriesResponse] = await Promise.all([
+          getHeroSlides(),
+          getFeaturedProducts(),
+          getCategories()
+        ]);
+
+        setHeroSlides(heroResponse.data);
+        setFeaturedProducts(productsResponse.data);
+        setCategories(categoriesResponse.data);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Failed to load data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
     };
+
     fetchData();
   }, []);
 
 
   // Auto-slide carousel
   useEffect(() => {
+    if (heroSlides.length === 0) return;
+
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 5000);
@@ -47,13 +70,48 @@ const HomePage = () => {
     setCurrentSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
   };
 
+   // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <NavigationBar />
+        <div className="flex items-center justify-center h-[70vh]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600 text-lg">Loading...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-white">
+        <NavigationBar />
+        <div className="flex items-center justify-center h-[70vh]">
+          <div className="text-center max-w-md px-4">
+            <div className="bg-red-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+              <X className="w-8 h-8 text-red-600" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Oops!</h2>
+            <p className="text-gray-600 mb-4">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-colors"
+            >
+              Try Again
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <NavigationBar />
-
-      {/* ✅ TODO: Replace heroSlides with API response */}
-      {/* ✅ TODO: Replace featuredProducts with backend endpoint */}
-      {/* ✅ TODO: Replace categories with /api/categories once backend ready */}
 
       {/* Mobile Menu */}
         {isMenuOpen && (
@@ -79,6 +137,7 @@ const HomePage = () => {
         )}    
       
       {/* Hero Section */}
+      {heroSlides.length > 0 && (
       <section className="relative h-[70vh] overflow-hidden">
         <div className="relative w-full h-full">
           {heroSlides.map((slide, index) => (
@@ -139,8 +198,10 @@ const HomePage = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* Features Section */}
+
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
@@ -175,8 +236,10 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      
 
       {/* Categories Section */}
+      {categories.length > 0 && (
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Shop by Category</h2>
@@ -198,14 +261,16 @@ const HomePage = () => {
                   <h3 className="text-xl font-semibold mb-1 group-hover:text-blue-600 transition-colors">
                     {category.name}
                   </h3>
-                  <p className="text-gray-600">{category.count}</p>
+                  <p className="text-gray-600">{category.count || category.product_count} products</p>
                 </Link>
               ))}
           </div>
         </div>
       </section>
+      )}
 
       {/* Featured Products */}
+      {featuredProducts.length > 0 && (
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center mb-12">
@@ -218,6 +283,7 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
@@ -234,7 +300,7 @@ const HomePage = () => {
               Virtual Try-On
             </button>
             <button className="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-lg font-semibold transition-colors"
-              onClick={() => navigate("/category/eyeglasses-all")}
+              onClick={() => navigate("/category/view-all")}
               >
               Browse Collection
             </button>

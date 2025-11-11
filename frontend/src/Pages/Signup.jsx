@@ -1,8 +1,12 @@
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../Context/AuthContext";
+import { registerUser } from "../API/api_auth";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const { login } = useAuth(); 
+
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -15,34 +19,19 @@ const SignUp = () => {
     setError("");
     setLoading(true);
 
-    try {
-      // 🔹 [PLACEHOLDER] Replace this block with your backend API call
-      /*
-      const response = await fetch("http://localhost:5000/api/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, phone, email, password }),
-      });
+        try {
+      const response = await registerUser({ name, phone, email, password });
+      // response.data should have user info and tokens
+      const userData = response.data.user;
+      const tokens = response.data.tokens;
 
-      const data = await response.json();
+      // Update AuthContext
+      login(userData, tokens);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Signup failed");
-      }
-
-      // Save the new user (and possibly JWT token)
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      */
-
-      // 🔹 TEMPORARY DUMMY SIGNUP (for frontend testing)
-      const newUser = { name, phone, email };
-      localStorage.setItem("user", JSON.stringify(newUser));
-
-      // Navigate to homepage after signup
+      // Navigate to homepage
       navigate("/");
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || "Signup failed");
     } finally {
       setLoading(false);
     }

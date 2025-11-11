@@ -1,33 +1,37 @@
 import React from "react";
 import { X, ShoppingBag, MapPin, Heart, Ticket, Star, Settings, LogOut } from "lucide-react";
+import { useAuth } from "../../Context/AuthContext"; // adjust path
+import { useNavigate } from "react-router-dom";
 
-const ProfileDrawer = ({ isOpen, onClose, user }) => {
+const ProfileDrawer = ({ isOpen, onClose }) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    window.location.reload();
+    logout();         // clears user and localStorage
+    onClose();        // close drawer
+    navigate("/");    // redirect to home
   };
 
-  // Menu options — each represents a section of the user profile
+  if (!user) return null; // don't show drawer if user is not logged in
+
   const menuItems = [
-    { icon: <ShoppingBag size={18} />, label: "My Orders", route: "/orders" },
-    { icon: <MapPin size={18} />, label: "Saved Addresses", route: "/addresses" },
-    { icon: <Heart size={18} />, label: "Favourites", route: "/favourites" },
-    { icon: <Ticket size={18} />, label: "Discount Coupons", route: "/coupons" },
-    { icon: <Star size={18} />, label: "My Reviews", route: "/reviews" },
-    { icon: <Settings size={18} />, label: "Account Settings", route: "/settings" },
+  { icon: <ShoppingBag size={18} />, label: "My Orders", section: "orders" },
+  { icon: <MapPin size={18} />, label: "Saved Addresses", section: "addresses" },
+  { icon: <Heart size={18} />, label: "Favourites", section: "favourites" },
+  { icon: <Ticket size={18} />, label: "Discount Coupons", section: "coupons" },
+  { icon: <Settings size={18} />, label: "Account Settings", section: "settings" },
   ];
 
   return (
     <>
-      {/* Background Overlay */}
       {isOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-40 z-40"
           onClick={onClose}
-        ></div>
+        />
       )}
 
-      {/* Drawer Panel */}
       <div
         className={`fixed top-0 left-0 h-full w-80 bg-white shadow-xl z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-full"
@@ -35,10 +39,19 @@ const ProfileDrawer = ({ isOpen, onClose, user }) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-4 border-b">
-          <h2 className="text-xl font-semibold">My Profile</h2>
-          <button onClick={onClose} className="hover:text-red-500 transition">
-            <X size={22} />
-          </button>
+          <h2
+        className="text-xl font-semibold cursor-pointer hover:text-blue-600 transition"
+        onClick={() => {
+          navigate("/myprofile");
+          onClose(); // close drawer when navigating
+        }}
+      >
+        My Profile
+      </h2>
+
+      <button onClick={onClose} className="hover:text-red-500 transition">
+        <X size={22} />
+      </button>
         </div>
 
         {/* User Info */}
@@ -50,10 +63,13 @@ const ProfileDrawer = ({ isOpen, onClose, user }) => {
 
         {/* Menu Sections */}
         <div className="p-4 space-y-2 overflow-y-auto h-[calc(100%-220px)]">
-          {menuItems.map((item, index) => (
+          {menuItems.map((item) => (
             <button
-              key={index}
-              onClick={() => console.log(`Navigate to ${item.route}`)} // 🔗 Replace with navigate() later
+              key={item.section}
+              onClick={() => {
+                navigate(`/myprofile/${item.section}`);
+                onClose(); // close drawer
+              }}
               className="flex items-center gap-3 w-full px-4 py-2 rounded-lg text-left text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition"
             >
               {item.icon}
