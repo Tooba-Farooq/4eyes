@@ -56,6 +56,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')
+        payment_method = validated_data.get('payment_method', 'cod')
+
         order = Order.objects.create(**validated_data)
 
         total = 0
@@ -64,17 +66,27 @@ class OrderSerializer(serializers.ModelSerializer):
             quantity = item['quantity']
             price = item['price']
 
-            # reduce stock safely
-            if product.stock < quantity:
-                raise serializers.ValidationError(f"Not enough stock for {product.name}")
-
-            product.stock -= quantity
-            product.save()
-
             OrderItem.objects.create(order=order, product=product, quantity=quantity, price=price)
             total += price * quantity
 
         order.total_amount = total
+
+        if payment_method == 'card':
+            order.status = 'Awaiting Payment'
+            order.is_paid = False
+        else:
+            # for COD, confirm immediately and deduct stock
+            order.status = 'Confirmed'
+            order.is_paid = False
+
+            for oi in order.items.all():
+                product = oi.product
+                if product.stock < oi.quantity:
+                    raise serializers.ValidationError(f"Not enough stock for {product.name}")
+                product.stock -= oi.quantity
+                product.save()
+
+
         order.save()
         return order
 

@@ -7,6 +7,9 @@ urlpatterns = [
     path('categories/', views.category_list, name='category-list'),
     path('products/<int:pk>/', views.product_detail, name='product-detail'),
     path('products/', views.product_list, name='product-list'),
-    path('place-order/', views.place_order, name='place-order')
+    path('place-order/', views.place_order, name='place-order'),
+    path('place-order/', views.place_order),
+    path('create-checkout-session/', views.create_checkout_session),
+    path('stripe-webhook/', views.stripe_webhook),
 
 ]
