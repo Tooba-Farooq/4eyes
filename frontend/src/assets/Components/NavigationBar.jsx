@@ -230,6 +230,7 @@ useEffect(() => {
           </div>
 
           <Link to="/category/accessories" className="text-gray-700 hover:text-blue-600">Accessories</Link>
+          <Link to="/tryon" className="text-gray-700 hover:text-blue-600">Virtual TryOn</Link>
           <Link to="/about" className="text-gray-700 hover:text-blue-600">About</Link>
 
         </nav>

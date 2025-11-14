@@ -10,12 +10,12 @@ import CartPage from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import { CartProvider } from "./Context/CartContext";
 import ScrollToTop from "./assets/Components/ScrollTop";
-import ARGlassesTryOn from "./assets/Components/ARGlassesTryOn";
 import PaymentSuccess from "./Pages/PaymentSuccess";
 import PaymentCancel from "./Pages/PaymentCancel";
 import SearchResults from "./Pages/SearchResults";
 import { AuthProvider } from "./Context/AuthContext";
 import ProfilePage from "./Pages/MyProfile";
+import VirtualTryOnPage from "./Pages/TryOn";
 
 function App() {
   return (
@@ -33,11 +33,12 @@ function App() {
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage/>}/>
           <Route path="/checkout" element={<Checkout/>}/>
-          <Route path="/tryon" element={<ARGlassesTryOn/>}/>
+          
           <Route path="/payment-success" element={<PaymentSuccess />} />
           <Route path="/payment-cancel" element={<PaymentCancel />} />
           <Route path="/search" element={<SearchResults />} />
           <Route path="/myprofile/:section?" element={<ProfilePage />} />
+          <Route path="/tryon" element={<VirtualTryOnPage/>} />
           </Routes>
         </CartProvider>
       </AuthProvider>
@@ -45,4 +46,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

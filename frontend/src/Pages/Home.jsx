@@ -206,9 +206,9 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="text-center group">
-              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+              <button className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors" onClick={() => navigate("/tryon")}>
                 <Camera className="w-8 h-8 text-blue-600" />
-              </div>
+              </button>
               <h3 className="text-xl font-semibold mb-2">Virtual Try-On</h3>
               <p className="text-gray-600">See how glasses look on you with our AR technology</p>
             </div>
@@ -295,7 +295,8 @@ const HomePage = () => {
             Try our virtual fitting technology and discover eyewear that suits you perfectly
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center">
+            <button className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center"
+            onClick={() => navigate("/tryon")}>
               <Camera className="w-5 h-5 mr-2" />
               Virtual Try-On
             </button>
