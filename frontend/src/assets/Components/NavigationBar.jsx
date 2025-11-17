@@ -85,11 +85,9 @@ useEffect(() => {
   };
 
 
-  const handleLogout = () => {
-  localStorage.removeItem("user");
-  setUser(null);  // now this exists
-  // Optional: redirect after logout
-  navigate("/");
+    const handleLogout = () => {
+    logout();
+    navigate("/");
   };
   
  const toggleDropdown = (menu) => {
@@ -395,6 +393,7 @@ useEffect(() => {
               if (!user) {
                 setShowSignInPrompt(true); // Show sign-in prompt only if not logged in
               } else {
+                navigate('/myprofile/favourites');
                 console.log("Open Favourites Page"); // Later you can navigate to Favourites Page
               }
             }}

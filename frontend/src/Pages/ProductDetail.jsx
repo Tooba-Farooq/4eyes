@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { X, Star, ShoppingCart, Heart, Truck, RefreshCw, Shield } from "lucide-react";
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
 import { useCart } from "../Context/CartContext";
-import { getProductDetail } from "../API/api";
+import { getProductDetail, addToFavourites, removeFromFavourites, getMyFavourites } from "../API/api";
+import { useAuth } from "../Context/AuthContext";
 
 const ProductDetailPage = () => {
   const { addToCart } = useCart();
   const { id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  
+  // Favourites states
+  const [isFavourite, setIsFavourite] = useState(false);
+  const [isLoadingFav, setIsLoadingFav] = useState(false);
+  const [showSignInPrompt, setShowSignInPrompt] = useState(false);
 
   // Fetch product details from backend
   useEffect(() => {
@@ -33,6 +41,49 @@ const ProductDetailPage = () => {
 
     fetchProduct();
   }, [id]);
+
+  // Check if product is in favourites
+  useEffect(() => {
+    if (user && product?.id) {
+      checkIfFavourite();
+    }
+  }, [user, product?.id]);
+
+  const checkIfFavourite = async () => {
+    try {
+      const response = await getMyFavourites();
+      const isFav = response.data.some(
+        (item) => item.product?.id === parseInt(product.id)
+      );
+      setIsFavourite(isFav);
+    } catch (error) {
+      console.error('Error checking favourite status:', error);
+    }
+  };
+
+  const handleToggleFavourite = async () => {
+    if (!user) {
+      setShowSignInPrompt(true);
+      return;
+    }
+
+    setIsLoadingFav(true);
+    
+    try {
+      if (isFavourite) {
+        await removeFromFavourites(product.id);
+        setIsFavourite(false);
+      } else {
+        await addToFavourites(product.id);
+        setIsFavourite(true);
+      }
+    } catch (error) {
+      console.error('Error toggling favourite:', error);
+      alert(error.response?.data?.error || error.response?.data?.message || 'Failed to update favourites');
+    } finally {
+      setIsLoadingFav(false);
+    }
+  };
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -118,6 +169,35 @@ const ProductDetailPage = () => {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <NavigationBar />
+
+      {/* Sign In Prompt Modal */}
+      {showSignInPrompt && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg shadow-xl max-w-md mx-4">
+            <h3 className="text-xl font-semibold mb-4">Sign In Required</h3>
+            <p className="text-gray-600 mb-6">
+              Please sign in to add products to your favourites.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => {
+                  setShowSignInPrompt(false);
+                  navigate('/login');
+                }}
+                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => setShowSignInPrompt(false)}
+                className="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="flex-grow py-16 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -219,11 +299,41 @@ const ProductDetailPage = () => {
                   <ShoppingCart className="w-5 h-5" />
                   {product.stock_status === "Out of stock" ? "Out of Stock" : "Add to Cart"}
                 </button>
-                <button className="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-4 rounded-lg transition-colors">
-                  <Heart className="w-5 h-5" />
+                
+                {/* Favourite Button */}
+                <button
+                  onClick={handleToggleFavourite}
+                  disabled={isLoadingFav}
+                  className={`px-6 py-4 rounded-lg transition-all duration-200 ${
+                    isFavourite
+                      ? 'bg-red-100 hover:bg-red-200 text-red-600'
+                      : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                  } ${isLoadingFav ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  title={isFavourite ? 'Remove from favourites' : 'Add to favourites'}
+                >
+                  <Heart
+                    className={`w-5 h-5 transition-all ${
+                      isFavourite ? 'fill-current' : ''
+                    }`}
+                  />
                 </button>
               </div>
 
+              {/* Features */}
+              <div className="grid grid-cols-3 gap-4 pt-6 border-t">
+                <div className="text-center">
+                  <Truck className="w-6 h-6 mx-auto mb-2 text-blue-600" />
+                  <p className="text-xs text-gray-600">Free Delivery</p>
+                </div>
+                <div className="text-center">
+                  <RefreshCw className="w-6 h-6 mx-auto mb-2 text-blue-600" />
+                  <p className="text-xs text-gray-600">Easy Returns</p>
+                </div>
+                <div className="text-center">
+                  <Shield className="w-6 h-6 mx-auto mb-2 text-blue-600" />
+                  <p className="text-xs text-gray-600">Secure Payment</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

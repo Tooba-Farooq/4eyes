@@ -1,4 +1,3 @@
-// src/api.js
 import axios from 'axios';
 
 // Create an Axios instance
@@ -9,16 +8,85 @@ const API = axios.create({
   },
 });
 
-// Add request interceptor to include auth token
+// ✅ Request interceptor: attach latest access token
 API.interceptors.request.use(
   (config) => {
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
-    if (user?.token) {
-      config.headers.Authorization = `Bearer ${user.token}`;
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
     return config;
   },
-  (error) => {
+  (error) => Promise.reject(error)
+);
+
+// ✅ Flag to avoid multiple simultaneous refreshes
+let isRefreshing = false;
+let failedQueue = [];
+
+// Helper to process queued requests once token is refreshed
+const processQueue = (error, token = null) => {
+  failedQueue.forEach((prom) => {
+    if (error) prom.reject(error);
+    else prom.resolve(token);
+  });
+  failedQueue = [];
+};
+
+// ✅ Response interceptor: handles 401 errors gracefully
+API.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    const originalRequest = error.config;
+
+    // If request already retried once, don't loop infinitely
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      const refreshToken = localStorage.getItem('refreshToken');
+      if (!refreshToken) {
+        console.warn("No refresh token found → redirecting to login");
+        localStorage.clear();
+        window.location.href = '/login';
+        return Promise.reject(error);
+      }
+
+      if (isRefreshing) {
+        // If token is already being refreshed, wait for it
+        return new Promise(function (resolve, reject) {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            originalRequest.headers.Authorization = `Bearer ${token}`;
+            return API(originalRequest);
+          })
+          .catch((err) => Promise.reject(err));
+      }
+
+      originalRequest._retry = true;
+      isRefreshing = true;
+
+      try {
+        const response = await axios.post(
+          'http://127.0.0.1:8000/api/token/refresh/',
+          { refresh: refreshToken },
+          { headers: { 'Content-Type': 'application/json' } }
+        );
+
+        const newAccessToken = response.data.access;
+        localStorage.setItem('accessToken', newAccessToken);
+        API.defaults.headers.Authorization = `Bearer ${newAccessToken}`;
+        processQueue(null, newAccessToken);
+        return API(originalRequest);
+      } catch (refreshError) {
+        console.error('Token refresh failed:', refreshError);
+        processQueue(refreshError, null);
+        localStorage.clear();
+        window.location.href = '/login';
+        return Promise.reject(refreshError);
+      } finally {
+        isRefreshing = false;
+      }
+    }
+
     return Promise.reject(error);
   }
 );
@@ -51,31 +119,54 @@ export const createCheckoutSession = (orderId) =>
 // Search products
 export const searchProducts = (query) => API.get('search/', { params: { q: query } });
 
-
 // ---- PROFILE API FUNCTIONS ---- //
 
-// Orders
-export const getMyOrders = () => API.get('orders/my-orders/');
-export const getOrderDetail = (orderId) => API.get(`orders/${orderId}/`);
+// User Profile - Get profile
+export const getProfile = () => API.get('profile/');
 
-// Addresses
-export const getMyAddresses = () => API.get('addresses/my-addresses/');
-export const addAddress = (addressData) => API.post('addresses/', addressData);
-export const updateAddress = (addressId, addressData) => API.put(`addresses/${addressId}/`, addressData);
-export const deleteAddress = (addressId) => API.delete(`addresses/${addressId}/`);
+// User Profile - Update profile
+export const updateProfile = (userData) => API.put('profile/', userData);
 
-// Favourites
-export const getMyFavourites = () => API.get('favourites/my-favourites/');
-export const addToFavourites = (productId) => API.post(`favourites/${productId}/`);
-export const removeFromFavourites = (productId) => API.delete(`favourites/${productId}/`);
+// Change password
+export const changePassword = (passwordData) => API.post('change-password/', passwordData);
 
-// Coupons
-export const getMyCoupons = () => API.get('coupons/my-coupons/');
-export const applyCoupon = (couponCode) => API.post('coupons/apply/', { code: couponCode });
+// ---- ORDERS API FUNCTIONS ---- //
 
-// User Profile
-export const updateProfile = (userData) => API.put('users/profile/', userData);
-export const changePassword = (passwordData) => API.put('users/change-password/', passwordData);
+// Get user's orders
+export const getMyOrders = () => API.get('my-orders/');
 
+// ---- ADDRESS API FUNCTIONS ---- //
+
+// Get all addresses
+export const getMyAddresses = () => API.get('my-addresses/');
+
+// Create new address
+export const addAddress = (addressData) => API.post('my-addresses/', addressData);
+
+// Update address - NOTE: uses /addresses/ endpoint, not /my-addresses/
+export const updateAddress = (addressId, addressData) => 
+  API.put(`addresses/${addressId}/`, addressData);
+
+// Delete address - NOTE: uses /addresses/ endpoint, not /my-addresses/
+export const deleteAddress = (addressId) => 
+  API.delete(`addresses/${addressId}/`);
+
+// ---- FAVOURITES API FUNCTIONS ---- //
+
+// Get user's favourites
+export const getMyFavourites = () => API.get('my-favourites/');
+
+// Add product to favourites
+export const addToFavourites = (productId) => 
+  API.post('add-to-favourites/', { product_id: productId });
+
+// Remove product from favourites
+export const removeFromFavourites = (productId) => 
+  API.delete(`remove-from-favourites/${productId}/`);
+
+// ---- COUPONS API FUNCTIONS ---- //
+
+// Get available coupons
+export const getMyCoupons = () => API.get('my-coupons/');
 
 export default API;

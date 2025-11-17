@@ -1,16 +1,38 @@
 // Checkout.jsx
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
 import { useCart } from "../Context/CartContext";
-import { placeOrder, createCheckoutSession } from "../API/api";
+import { placeOrder, createCheckoutSession,getMyAddresses } from "../API/api";
 import { useNavigate } from "react-router-dom";
 import { CheckCircle, X, Loader } from "lucide-react";
+import { useAuth } from "../Context/AuthContext";
+
+
 
 const Checkout = () => {
   const { cartItems, getTotalPrice, clearCart } = useCart();
   const total = getTotalPrice();
   const navigate = useNavigate();
+
+  const { user } = useAuth(); // ✅ to know if user is logged in
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      const fetchAddresses = async () => {
+        try {
+          const response = await getMyAddresses();
+          setSavedAddresses(response.data);
+        } catch (err) {
+          console.error("Error fetching saved addresses:", err);
+        }
+      };
+      fetchAddresses();
+    }
+  }, [user]);
+
 
   const [formData, setFormData] = useState({
     name: "",
@@ -209,6 +231,53 @@ const Checkout = () => {
               />
             </div>
 
+            {/* ✅ Saved Addresses for Logged-In Users */}
+            {user && savedAddresses.length > 0 && (
+              <div className="mb-4">
+                <label className="block font-semibold mb-2">Choose from Saved Addresses</label>
+                <div className="space-y-2">
+                  {savedAddresses.map((addr) => (
+                    <label
+                      key={addr.id}
+                      className={`flex items-start gap-3 p-3 border rounded-lg cursor-pointer transition ${
+                        selectedAddress === addr.id
+                          ? "border-blue-500 bg-blue-50"
+                          : "border-gray-300 hover:border-blue-300"
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="savedAddress"
+                        checked={selectedAddress === addr.id}
+                        onChange={() => {
+                          setSelectedAddress(addr.id);
+                          setFormData({
+                            ...formData,
+                            address: `${addr.street}, ${addr.city}, ${addr.zip_code}`,
+                            phone: addr.phone || formData.phone,
+                            name: formData.name || user?.name,
+                            email: formData.email || user?.email,
+                          });
+                        }}
+                        className="mt-1 text-blue-600"
+                      />
+                      <div>
+                        <p className="font-medium">{addr.type}</p>
+                        <p className="text-gray-600 text-sm">{addr.street}</p>
+                        <p className="text-gray-600 text-sm">
+                          {addr.city}, {addr.zip_code}
+                        </p>
+                        {addr.phone && (
+                          <p className="text-gray-500 text-sm">Phone: {addr.phone}</p>
+                        )}
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Manual Address Entry (still visible if user wants to type a new one) */}
             <div>
               <label className="block font-semibold mb-1">Address *</label>
               <textarea
@@ -221,6 +290,7 @@ const Checkout = () => {
                 className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none disabled:bg-gray-100"
               />
             </div>
+
 
             <div>
               <label className="block font-semibold mb-1">
