@@ -4,27 +4,8 @@ import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
 import FaceDetector from "../assets/Components/FaceDetector";
 import VirtualGlasses from "../assets/Components/VirtualGlasses";
-
-const GLASSES_OPTIONS = [
-  { 
-    id: "glasses_3.glb", 
-    name: "Round Frame Sunnies", 
-    price: "$75", 
-    image: "/images/glasses_3_thumb.jpg" 
-  },
-  { 
-    id: "glasses_4.glb", 
-    name: "Round Frame ", 
-    price: "$95", 
-    image: "/images/glasses_4_thumb.jpg" 
-  },
-  { 
-    id: "glasses_5.glb", 
-    name: "Star Funky Shades", 
-    price: "$110", 
-    image: "/images/glasses_5_thumb.jpg" 
-  },
-];
+import { GLASSES_OPTIONS } from "../API/glasses"; 
+import { useCart } from "../Context/CartContext";
 
 export default function VirtualTryOnPage() {
   const [faceData, setFaceData] = useState(null);
@@ -32,8 +13,29 @@ export default function VirtualTryOnPage() {
   const [showInstructions, setShowInstructions] = useState(true);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [videoDimensions, setVideoDimensions] = useState(null);
-  
+  const { addToCart } = useCart();
   const cameraContainerRef = useRef(null);
+
+const handleAddToCart = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const selectedItem = GLASSES_OPTIONS.find(g => g.id === selectedGlasses);
+
+  if (!selectedItem) {
+    alert("Unable to add item. Please select glasses.");
+    return;
+  }
+
+  addToCart({
+    id: selectedItem.id,
+    name: selectedItem.name,
+    price: selectedItem.price,
+    image: selectedItem.image,
+    quantity: 1,
+  });
+};
+
 
   const handleFaceUpdate = (landmarks) => {
     setFaceData(landmarks);
@@ -168,9 +170,6 @@ export default function VirtualTryOnPage() {
                 >
                   Show Instructions
                 </button>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                  Capture Photo
-                </button>
               </div>
             </div>
           </div>
@@ -221,10 +220,6 @@ export default function VirtualTryOnPage() {
                 ))}
               </div>
 
-              {/* Add to Cart */}
-              <button className="w-full mt-6 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition font-semibold">
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>

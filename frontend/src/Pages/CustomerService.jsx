@@ -37,7 +37,7 @@ const CustomerServicePage = () => {
         <section id="contact" className="mb-16 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-4">Contact Us</h2>
           <p className="text-gray-700">
-            You can reach us at <a href="mailto:support@yourstore.com" className="text-blue-600">support@yourstore.com</a> or call +1 234 567 890.
+            You can reach us at <a href="ayeshaghbhatti@gmail.com" className="text-blue-600">ayeshaghbhatti@gmail.com</a> or call +1 234 567 890.
           </p>
         </section>
 
@@ -62,7 +62,7 @@ const CustomerServicePage = () => {
         {/* Size Guide */}
         <section id="size-guide" className="mb-16 scroll-mt-20">
           <h2 className="text-2xl font-semibold mb-4">Size Guide</h2>
-          <p className="text-gray-700">huihui.</p>
+          <p className="text-gray-700">Updating Soon.</p>
         </section>
       </main>
 

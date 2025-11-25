@@ -16,6 +16,7 @@ export default function FaceDetector({
   const canvasRef = useRef(null);
   const faceLandmarkerRef = useRef(null);
   const rafRef = useRef(null);
+  const streamRef = useRef(null); // ADD THIS: Store stream reference
   const [isReady, setIsReady] = useState(false);
 
   // smoothing buffer to reduce jitter (optional)
@@ -35,6 +36,7 @@ export default function FaceDetector({
           stream.getTracks().forEach((t) => t.stop());
           return;
         }
+        streamRef.current = stream; // CHANGE: Store stream reference
         videoRef.current.srcObject = stream;
         await videoRef.current.play();
       } catch (err) {
@@ -72,6 +74,17 @@ export default function FaceDetector({
 
     return () => {
       mounted = false;
+      
+      // CHANGE: Stop camera stream when component unmounts
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach((track) => track.stop());
+        streamRef.current = null;
+      }
+      
+      // Clear video source
+      if (videoRef.current) {
+        videoRef.current.srcObject = null;
+      }
     };
   }, [maxFaces]);
 
@@ -207,13 +220,10 @@ export default function FaceDetector({
     // cleanup
     return () => {
       window.removeEventListener("resize", resizeCanvas);
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      try {
-        // don't stop camera here; leaving camera control to parent is fine.
-        // if you want to stop camera when component unmounts, uncomment:
-        // const stream = video.srcObject;
-        // if (stream) stream.getTracks().forEach(t => t.stop());
-      } catch (e) {}
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null; // CHANGE: Clear the reference
+      }
     };
   }, [isReady, onFaceUpdate, showOverlay]);
 

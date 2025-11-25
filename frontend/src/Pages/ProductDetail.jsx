@@ -299,6 +299,15 @@ const ProductDetailPage = () => {
                   <ShoppingCart className="w-5 h-5" />
                   {product.stock_status === "Out of stock" ? "Out of Stock" : "Add to Cart"}
                 </button>
+
+                {product.is_AR && (
+                  <button
+                    onClick={() => navigate('/tryon')}
+                    className="flex-1 bg-blue-700 hover:bg-green-700 text-white px-6 py-4 rounded-lg text-lg font-semibold transition-all"
+                  >
+                    Virtual Try On
+                  </button>
+                )}
                 
                 {/* Favourite Button */}
                 <button
@@ -317,6 +326,7 @@ const ProductDetailPage = () => {
                     }`}
                   />
                 </button>
+                
               </div>
 
               {/* Features */}

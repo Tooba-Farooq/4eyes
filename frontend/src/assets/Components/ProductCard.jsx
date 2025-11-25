@@ -66,6 +66,11 @@ const ProductCard = ({ product, onFavouriteRemoved }) => {
               {product.tag}
             </span>
           )}
+          {product.is_AR && (
+            <span className="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded text-sm font-medium ml-1">
+              Virtual Try-On Available
+            </span>
+          )}
           <div className="absolute top-3 right-3 flex gap-2">
             <button
               onClick={handleToggleFavorite}
@@ -116,7 +121,7 @@ const ProductCard = ({ product, onFavouriteRemoved }) => {
               </span>
               {product.originalPrice && (
                 <span className="text-sm text-gray-500 line-through">
-                  ${product.originalPrice}
+                  Rs.{product.originalPrice}
                 </span>
               )}
             </div>
