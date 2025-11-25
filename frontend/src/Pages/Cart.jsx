@@ -26,7 +26,7 @@ const CartPage = () => {
                 
                 <div className="flex-1 ml-4">
                   <h4 className="font-semibold text-lg">{item.name}</h4>
-                  <p className="text-gray-500">${item.price}</p>
+                  <p className="text-gray-500">Rs.{item.price}</p>
 
                   {/* Quantity Controls */}
                   <div className="flex items-center mt-2 space-x-2">
@@ -63,7 +63,7 @@ const CartPage = () => {
 
             {/* Total + Checkout */}
             <div className="flex justify-between items-center mt-6">
-              <h2 className="text-2xl font-bold">Total: ${total.toFixed(2)}</h2>
+              <h2 className="text-2xl font-bold">Total: Rs.{total.toFixed(2)}</h2>
               <button
                 className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
                 onClick={() => navigate("/checkout")}

@@ -6,7 +6,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Load user + token from localStorage on startup
+  // Load user + token from localStorage on startup
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const accessToken = localStorage.getItem("accessToken");
@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // ✅ Login handler (stores tokens and user info)
+  // Login handler (stores tokens and user info)
   const login = (userData, tokens) => {
     const userToStore = {
       id: userData.id,
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("refreshToken", tokens.refresh);
   };
 
-  // ✅ Logout handler (clears everything)
+  // Logout handler (clears everything)
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -49,14 +49,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("refreshToken");
   };
 
-  // ✅ Update user data (used for profile updates)
+  // Update user data (used for profile updates)
   const updateUser = (userData) => {
     const updatedUser = { ...user, ...userData };
     setUser(updatedUser);
     localStorage.setItem("user", JSON.stringify(updatedUser));
   };
 
-  // ✅ Refresh access token using refresh token
+  // Refresh access token using refresh token
   const refreshAccessToken = async () => {
     const refreshToken = localStorage.getItem("refreshToken");
     if (!refreshToken) {
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ✅ Automatically refresh token every 14 minutes
+  // Automatically refresh token every 14 minutes
   useEffect(() => {
     const interval = setInterval(() => {
       const accessToken = localStorage.getItem("accessToken");
@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
   );
 };
 
-// ✅ Hook for easy access to auth
+// Hook for easy access to auth
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

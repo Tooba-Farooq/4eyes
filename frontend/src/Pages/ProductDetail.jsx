@@ -247,7 +247,7 @@ const ProductDetailPage = () => {
               {/* Price */}
               <div className="flex items-baseline mb-6">
                 <span className="text-4xl font-bold text-gray-900">
-                  ${product.price}
+                  Rs.{product.price}
                 </span>
               </div>
 

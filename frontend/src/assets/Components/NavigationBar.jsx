@@ -269,7 +269,7 @@ useEffect(() => {
                             <p className="font-medium text-gray-900">{product.name}</p>
                             <p className="text-sm text-gray-500">{product.category}</p>
                           </div>
-                          <p className="font-semibold text-blue-600">${product.price}</p>
+                          <p className="font-semibold text-blue-600">Rs.{product.price}</p>
                         </button>
                       ))}
                       <Link

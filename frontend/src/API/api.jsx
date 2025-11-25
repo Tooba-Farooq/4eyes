@@ -8,7 +8,7 @@ const API = axios.create({
   },
 });
 
-// ✅ Request interceptor: attach latest access token
+// Request interceptor: attach latest access token
 API.interceptors.request.use(
   (config) => {
     const accessToken = localStorage.getItem('accessToken');
@@ -20,7 +20,7 @@ API.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ✅ Flag to avoid multiple simultaneous refreshes
+// Flag to avoid multiple simultaneous refreshes
 let isRefreshing = false;
 let failedQueue = [];
 
@@ -33,24 +33,56 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// ✅ Response interceptor: handles 401 errors gracefully
+// Response interceptor: handles 401 errors gracefully
 API.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
 
+    const publicEndpoints = [
+      '/',
+  'hero-slides',
+  'featured-products',
+  'categories',
+  'products',
+  'search',
+  'banners',
+  'offers',
+  'reviews',
+  "tryon"
+];
+
+    
+    const isPublicEndpoint = publicEndpoints.some(endpoint => 
+      originalRequest.url?.includes(endpoint)
+    );
+
+    // If it's a public endpoint that returned 401, just continue without auth
+    if (isPublicEndpoint && error.response?.status === 401) {
+      console.warn('Public endpoint returned 401, continuing without auth');
+      // Don't reject - return empty data or handle gracefully
+      return Promise.resolve({ data: [] });
+    }
+
     // If request already retried once, don't loop infinitely
     if (error.response?.status === 401 && !originalRequest._retry) {
       const refreshToken = localStorage.getItem('refreshToken');
-      if (!refreshToken) {
+      
+      // Only redirect to login if we're NOT on a public endpoint
+      if (!refreshToken && !isPublicEndpoint) {
         console.warn("No refresh token found → redirecting to login");
         localStorage.clear();
         window.location.href = '/login';
         return Promise.reject(error);
       }
+      
+      // If no refresh token but public endpoint, just return empty data
+      if (!refreshToken && isPublicEndpoint) {
+        return Promise.resolve({ data: [] });
+      }
 
+      // ... rest of your token refresh logic stays the same
       if (isRefreshing) {
-        // If token is already being refreshed, wait for it
         return new Promise(function (resolve, reject) {
           failedQueue.push({ resolve, reject });
         })
@@ -80,7 +112,11 @@ API.interceptors.response.use(
         console.error('Token refresh failed:', refreshError);
         processQueue(refreshError, null);
         localStorage.clear();
-        window.location.href = '/login';
+        
+        // Only redirect if not on public endpoint
+        if (!isPublicEndpoint) {
+          window.location.href = '/login';
+        }
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
@@ -90,7 +126,6 @@ API.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
 // ---- API functions ---- //
 
 // Hero slides
@@ -144,12 +179,10 @@ export const getMyAddresses = () => API.get('my-addresses/');
 export const addAddress = (addressData) => API.post('my-addresses/', addressData);
 
 // Update address - NOTE: uses /addresses/ endpoint, not /my-addresses/
-export const updateAddress = (addressId, addressData) => 
-  API.put(`addresses/${addressId}/`, addressData);
+export const updateAddress = (addressId, addressData) => API.put(`addresses/${addressId}/`, addressData);
 
 // Delete address - NOTE: uses /addresses/ endpoint, not /my-addresses/
-export const deleteAddress = (addressId) => 
-  API.delete(`addresses/${addressId}/`);
+export const deleteAddress = (addressId) => API.delete(`addresses/${addressId}/`);
 
 // ---- FAVOURITES API FUNCTIONS ---- //
 
@@ -157,12 +190,10 @@ export const deleteAddress = (addressId) =>
 export const getMyFavourites = () => API.get('my-favourites/');
 
 // Add product to favourites
-export const addToFavourites = (productId) => 
-  API.post('add-to-favourites/', { product_id: productId });
+export const addToFavourites = (productId) => API.post('add-to-favourites/', { product_id: productId });
 
 // Remove product from favourites
-export const removeFromFavourites = (productId) => 
-  API.delete(`remove-from-favourites/${productId}/`);
+export const removeFromFavourites = (productId) => API.delete(`remove-from-favourites/${productId}/`);
 
 // ---- COUPONS API FUNCTIONS ---- //
 
