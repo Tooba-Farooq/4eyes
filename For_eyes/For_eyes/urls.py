@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from apis import admin_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('apis/', include('apis.urls')),
     path('apis/auth/', include('accounts.urls')),
+    path('admin-analytics/', admin_views.analytics_dashboard, name='analytics-dashboard'),
 
 ]
 

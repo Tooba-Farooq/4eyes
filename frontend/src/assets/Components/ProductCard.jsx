@@ -2,26 +2,29 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Star, Camera, Heart } from "lucide-react";
 import { useCart } from "../../Context/CartContext";
+import { useFavourites } from "../../Context/FavouritesContext";
 import { addToFavourites, removeFromFavourites, getMyFavourites } from "../../API/api";
 
 const ProductCard = ({ product, onFavouriteRemoved }) => {
   const { addToCart } = useCart();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const {isFavourite, addFavourite, removeFavourite, isLoggedIn} = useFavourites();
   const [favoriteLoading, setFavoriteLoading] = useState(false);
 
-  useEffect(() => {
-    checkIfFavorite();
-  }, [product.id]);
+  const isFav = isFavourite(product.id);
 
-  const checkIfFavorite = async () => {
-    try {
-      const response = await getMyFavourites();
-      const isFav = response.data.some((fav) => fav.product?.id === product.id);
-      setIsFavorite(isFav);
-    } catch (err) {
-      console.error("Error checking favorite:", err);
-    }
-  };
+  // useEffect(() => {
+  //   checkIfFavorite();
+  // }, [product.id]);
+
+  // const checkIfFavorite = async () => {
+  //   try {
+  //     const response = await getMyFavourites();
+  //     const isFav = response.data.some((fav) => fav.product?.id === product.id);
+  //     setIsFavorite(isFav);
+  //   } catch (err) {
+  //     console.error("Error checking favorite:", err);
+  //   }
+  // };
 
   const handleAddToCart = (e) => {
     e.preventDefault();
@@ -33,20 +36,31 @@ const ProductCard = ({ product, onFavouriteRemoved }) => {
     e.preventDefault();
     e.stopPropagation();
 
+    // ✅ Check if user is logged in first
+    if (!isLoggedIn) {
+      alert("Please login to add products to favourites.");
+      return;
+    }
+
     try {
       setFavoriteLoading(true);
 
-      if (isFavorite) {
+      if (isFav) {
         await removeFromFavourites(product.id);
-        setIsFavorite(false);
-        if (onFavouriteRemoved) onFavouriteRemoved(product.id); // notify parent
+        removeFavourite(product.id);  // ✅ Update context
+        if (onFavouriteRemoved) onFavouriteRemoved(product.id);
       } else {
         await addToFavourites(product.id);
-        setIsFavorite(true);
+        addFavourite(product.id);  // ✅ Update context
       }
     } catch (err) {
       console.error("Error toggling favorite:", err);
-      alert("Failed to update favorites. Please login to continue.");
+      
+      if (err.response?.status === 401) {
+        alert("Please login to add products to favourites.");
+      } else {
+        alert("Failed to update favourites. Please try again.");
+      }
     } finally {
       setFavoriteLoading(false);
     }
@@ -66,18 +80,23 @@ const ProductCard = ({ product, onFavouriteRemoved }) => {
               {product.tag}
             </span>
           )}
+          {product.is_AR && (
+            <span className="absolute top-3 left-3 bg-blue-600 text-white px-2 py-1 rounded text-sm font-medium ml-1">
+              Virtual Try-On Available
+            </span>
+          )}
           <div className="absolute top-3 right-3 flex gap-2">
             <button
               onClick={handleToggleFavorite}
               disabled={favoriteLoading}
               className={`p-2 rounded-full transition-all ${
-                isFavorite
+                isFav
                   ? "bg-red-500 text-white"
                   : "bg-white bg-opacity-80 hover:bg-opacity-100 text-gray-700"
               } ${favoriteLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-              title={isFavorite ? "Remove from favourites" : "Add to favourites"}
+              title={isFav ? "Remove from favourites" : "Add to favourites"}
             >
-              <Heart className={`w-4 h-4 ${isFavorite ? "fill-current" : ""}`} />
+              <Heart className={`w-4 h-4 ${isFav ? "fill-current" : ""}`} />
             </button>
 
             {/* ✅ Keep Quick View */}
@@ -112,11 +131,11 @@ const ProductCard = ({ product, onFavouriteRemoved }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="text-xl font-bold text-gray-900">
-                ${product.price}
+                Rs.{product.price}
               </span>
               {product.originalPrice && (
                 <span className="text-sm text-gray-500 line-through">
-                  ${product.originalPrice}
+                  Rs.{product.originalPrice}
                 </span>
               )}
             </div>

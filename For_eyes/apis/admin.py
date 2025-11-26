@@ -5,7 +5,7 @@ from django.contrib import admin
 
 # apis/admin.py
 from django.contrib import admin
-from .models import Category, Product, HeroSlide, Order, OrderItem
+from .models import Category, Product, HeroSlide, Order, OrderItem, Coupon, Favourite, Address
 
 admin.site.register(Category)
 admin.site.register(Product)

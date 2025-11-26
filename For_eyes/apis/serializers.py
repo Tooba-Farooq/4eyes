@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Product, Category, HeroSlide, Order, OrderItem
+from django.contrib.auth import get_user_model
+from .models import Product, Category, HeroSlide, Order, OrderItem, Coupon, Favourite, Address
 
 class HeroSlideSerializer(serializers.ModelSerializer):
 
@@ -10,7 +11,7 @@ class HeroSlideSerializer(serializers.ModelSerializer):
 class ProductCardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['id', 'name', 'price', 'image', 'tag']
+        fields = ['id', 'name', 'price', 'image', 'tag', 'is_AR']
 
 class ProductDetailSerializer(serializers.ModelSerializer):
     category = serializers.StringRelatedField()
@@ -21,7 +22,7 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'name', 'description', 'price', 'stock_status',
             'brand', 'frame_material', 'color', 'gender',
-            'image', 'category', 'tag'
+            'image', 'category', 'tag', 'model', 'is_AR', 'configurations'
         ]
 
     def get_stock_status(self, obj):
@@ -58,7 +59,13 @@ class OrderSerializer(serializers.ModelSerializer):
         items_data = validated_data.pop('items')
         payment_method = validated_data.get('payment_method', 'cod')
 
+        request = self.context.get('request')
+        if request and request.user.is_authenticated:
+            validated_data['user'] = request.user
+
         order = Order.objects.create(**validated_data)
+
+        order.order_number = f"ORD-{order.id:06d}"
 
         total = 0
         for item in items_data:
@@ -89,5 +96,56 @@ class OrderSerializer(serializers.ModelSerializer):
 
         order.save()
         return order
+    
+
+User = get_user_model()  
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'name', 'email', 'phone']
 
 
+class AddressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ['id', 'type', 'street', 'city', 'zip_code', 'phone', 'is_default', 'created_at']
+        read_only_fields = ['created_at']
+
+
+class FavouriteSerializer(serializers.ModelSerializer):
+    product = ProductCardSerializer(read_only=True)
+
+    class Meta:
+        model = Favourite
+        fields = ['id', 'product', 'created_at']
+        read_only_fields = ['created_at']
+
+
+class CouponSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coupon
+        fields = ['id', 'code', 'discount', 'min_order', 'expires_at', 'is_active']
+
+
+# Update OrderSerializer to include items details
+class OrderItemDetailSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source='product.name', read_only=True)
+    product_image = serializers.ImageField(source='product.image', read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = ['id', 'product', 'product_name', 'product_image', 'quantity', 'price']
+
+
+class OrderListSerializer(serializers.ModelSerializer):
+    items = OrderItemDetailSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Order
+        fields = [
+            'id', 'order_number', 'name', 'email', 'phone', 'address',
+            'total_amount', 'status', 'payment_method', 'is_paid',
+            'created_at', 'items'
+        ]
+        read_only_fields = ['created_at']

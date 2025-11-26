@@ -95,7 +95,7 @@ const CartDrawer = () => {
                     />
                     <div className="flex-1 ml-3">
                       <h4 className="font-semibold text-gray-800">{item.name}</h4>
-                      <p className="text-gray-600 text-sm">${item.price}</p>
+                      <p className="text-gray-600 text-sm">Rs.{item.price}</p>
 
                       {/* Quantity Controls */}
                       <div className="flex items-center mt-2">
@@ -138,7 +138,7 @@ const CartDrawer = () => {
             {cartItems.length > 0 && (
               <div className="flex justify-between items-center mb-2">
                 <span className="font-semibold">Total:</span>
-                <span className="text-xl font-bold">${total.toFixed(2)}</span>
+                <span className="text-xl font-bold">Rs.{total.toFixed(2)}</span>
               </div>
             )}
 

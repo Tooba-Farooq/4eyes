@@ -9,6 +9,7 @@ import ProductDetailPage from "./Pages/ProductDetail";
 import CartPage from "./Pages/Cart";
 import Checkout from "./Pages/Checkout";
 import { CartProvider } from "./Context/CartContext";
+import { FavouritesProvider } from "./Context/FavouritesContext";
 import ScrollToTop from "./assets/Components/ScrollTop";
 import PaymentSuccess from "./Pages/PaymentSuccess";
 import PaymentCancel from "./Pages/PaymentCancel";
@@ -17,12 +18,14 @@ import { AuthProvider } from "./Context/AuthContext";
 import ProfilePage from "./Pages/MyProfile";
 import VirtualTryOnPage from "./Pages/TryOn";
 
+
 function App() {
   return (
     <Router>
       <ScrollToTop /> 
       <AuthProvider>
         <CartProvider>
+          <FavouritesProvider>
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
@@ -40,6 +43,7 @@ function App() {
           <Route path="/myprofile/:section?" element={<ProfilePage />} />
           <Route path="/tryon" element={<VirtualTryOnPage/>} />
           </Routes>
+          </FavouritesProvider>
         </CartProvider>
       </AuthProvider>
     </Router>

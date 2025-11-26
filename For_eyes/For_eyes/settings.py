@@ -39,6 +39,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -52,9 +53,25 @@ INSTALLED_APPS = [
     'accounts'
 ]
 
+JAZZMIN_SETTINGS = {
+    "site_title": "4 eyes Admin",
+    "site_header": "Store Management",
+    "site_brand": "4 Eyes",
+    "welcome_sign": "Welcome to 4 Eyes Admin Panel",
+    
+    # Add custom links for analytics
+    "custom_links": {
+        "apis": [{
+            "name": "Analytics Dashboard", 
+            "url": "analytics-dashboard",
+            "icon": "fas fa-chart-line",
+        }]
+    },
+}
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'apis.authentication.OptionalJWTAuthentication',
     ),
 }
 
@@ -74,7 +91,7 @@ ROOT_URLCONF = 'For_eyes.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+         'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

@@ -1,38 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Camera, CheckCircle } from "lucide-react";
 import NavigationBar from "../assets/Components/NavigationBar";
 import Footer from "../assets/Components/Footer";
 import FaceDetector from "../assets/Components/FaceDetector";
 import VirtualGlasses from "../assets/Components/VirtualGlasses";
-
-
-const GLASSES_OPTIONS = [
-  { 
-    id: "glasses_3.glb", 
-    name: "Round Frame Sunnies", 
-    price: "$75", 
-    image: "/images/glasses_3_thumb.jpg" 
-  },
-  { 
-    id: "glasses_4.glb", 
-    name: "Round Frame ", 
-    price: "$95", 
-    image: "/images/glasses_4_thumb.jpg" 
-  },
-  { 
-    id: "glasses_5.glb", 
-    name: "Star Funky Shades", 
-    price: "$110", 
-    image: "/images/glasses_5_thumb.jpg" 
-  },
-
-];
+import { GLASSES_OPTIONS } from "../API/glasses"; 
+import { useCart } from "../Context/CartContext";
 
 export default function VirtualTryOnPage() {
   const [faceData, setFaceData] = useState(null);
   const [selectedGlasses, setSelectedGlasses] = useState("glasses_4.glb");
   const [showInstructions, setShowInstructions] = useState(true);
   const [isCameraReady, setIsCameraReady] = useState(false);
+  const [videoDimensions, setVideoDimensions] = useState(null);
+  const { addToCart } = useCart();
+  const cameraContainerRef = useRef(null);
+
+const handleAddToCart = (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const selectedItem = GLASSES_OPTIONS.find(g => g.id === selectedGlasses);
+
+  if (!selectedItem) {
+    alert("Unable to add item. Please select glasses.");
+    return;
+  }
+
+  addToCart({
+    id: selectedItem.id,
+    name: selectedItem.name,
+    price: selectedItem.price,
+    image: selectedItem.image,
+    quantity: 1,
+  });
+};
+
 
   const handleFaceUpdate = (landmarks) => {
     setFaceData(landmarks);
@@ -40,6 +43,35 @@ export default function VirtualTryOnPage() {
       setIsCameraReady(true);
     }
   };
+
+  // Capture video dimensions when camera loads
+  useEffect(() => {
+    const captureVideoDimensions = () => {
+      const videoElement = cameraContainerRef.current?.querySelector('video');
+      if (videoElement && videoElement.videoWidth > 0) {
+        setVideoDimensions({
+          width: videoElement.videoWidth,
+          height: videoElement.videoHeight
+        });
+      }
+    };
+
+    // Try to capture dimensions immediately
+    const timer = setTimeout(captureVideoDimensions, 1000);
+
+    // Also listen for video metadata loaded event
+    const videoElement = cameraContainerRef.current?.querySelector('video');
+    if (videoElement) {
+      videoElement.addEventListener('loadedmetadata', captureVideoDimensions);
+    }
+
+    return () => {
+      clearTimeout(timer);
+      if (videoElement) {
+        videoElement.removeEventListener('loadedmetadata', captureVideoDimensions);
+      }
+    };
+  }, [isCameraReady]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -87,7 +119,7 @@ export default function VirtualTryOnPage() {
               )}
 
               {/* Camera Feed Container */}
-              <div className="relative aspect-[4/3] bg-gray-900">
+              <div className="relative aspect-[4/3] bg-gray-900" ref={cameraContainerRef}>
                 {/* Face Detection Guide */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
                   <div className="w-80 h-96 border-4 border-dashed border-white/50 rounded-3xl flex items-center justify-center">
@@ -105,6 +137,13 @@ export default function VirtualTryOnPage() {
                   </div>
                 )}
 
+                {/* Debug Info (Remove after testing) */}
+                {videoDimensions && (
+                  <div className="absolute top-4 right-4 bg-black/70 text-white px-3 py-1 rounded text-xs z-10">
+                    Video: {videoDimensions.width}x{videoDimensions.height}
+                  </div>
+                )}
+
                 {/* Camera Component */}
                 <div className="w-full h-full">
                   <FaceDetector 
@@ -114,10 +153,11 @@ export default function VirtualTryOnPage() {
                 </div>
 
                 {/* Virtual Glasses Overlay */}
-                {faceData && (
+                {faceData && videoDimensions && (
                   <VirtualGlasses 
                     faceData={faceData}
                     modelName={selectedGlasses}
+                    videoDimensions={videoDimensions}
                   />
                 )}
               </div>
@@ -129,9 +169,6 @@ export default function VirtualTryOnPage() {
                   className="text-sm text-blue-600 hover:text-blue-700"
                 >
                   Show Instructions
-                </button>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
-                  Capture Photo
                 </button>
               </div>
             </div>
@@ -183,10 +220,6 @@ export default function VirtualTryOnPage() {
                 ))}
               </div>
 
-              {/* Add to Cart */}
-              <button className="w-full mt-6 bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition font-semibold">
-                Add to Cart
-              </button>
             </div>
           </div>
         </div>

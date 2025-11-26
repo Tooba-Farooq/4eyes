@@ -12,10 +12,10 @@ const AboutPage = () => {
         <p className="text-lg text-gray-700 leading-relaxed">
           At 4Eyes, we believe eyewear is more than just vision—it’s style, comfort, 
           and technology. Our mission is to provide premium quality glasses with 
-          innovative features like virtual try-on and custom prescriptions.
+          innovative features like virtual try-on.
         </p>
         <p className="mt-4 text-lg text-gray-700">
-          Founded in 2024, we are committed to making eyewear accessible, stylish, 
+          Founded in 2025, we are committed to making eyewear accessible, stylish, 
           and reliable worldwide.
         </p>
       </section>

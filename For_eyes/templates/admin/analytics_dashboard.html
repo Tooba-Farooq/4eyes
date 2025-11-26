@@ -1,0 +1,398 @@
+{% extends "admin/base_site.html" %}
+{% block extrahead %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div style="max-width: 1600px; margin: 0 auto; padding: 30px;">
+    <h1 style="text-align: center; font-size: 36px; margin-bottom: 40px;">📊 Business Analytics Dashboard</h1>
+    
+    <!-- Order Statistics -->
+    <div style="margin: 30px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 20px;">Order Statistics</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Total Orders</div>
+                <div style="font-size: 36px; font-weight: bold; color: #417690; margin-top: 15px;">
+                    {{ order_stats.total_orders }}
+                </div>
+                <div style="color: {% if order_stats.order_change >= 0 %}#28a745{% else %}#dc3545{% endif %}; font-size: 14px; margin-top: 8px;">
+                    {% if order_stats.order_change >= 0 %}▲{% else %}▼{% endif %} {{ order_stats.order_change }}% vs last period
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Total Revenue</div>
+                <div style="font-size: 36px; font-weight: bold; color: #417690; margin-top: 15px;">
+                    Rs {{ order_stats.total_revenue|floatformat:2 }}
+                </div>
+                <div style="color: {% if order_stats.revenue_change >= 0 %}#28a745{% else %}#dc3545{% endif %}; font-size: 14px; margin-top: 8px;">
+                    {% if order_stats.revenue_change >= 0 %}▲{% else %}▼{% endif %} {{ order_stats.revenue_change }}% vs last period
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Orders Last 30 Days</div>
+                <div style="font-size: 36px; font-weight: bold; color: #417690; margin-top: 15px;">
+                    {{ order_stats.orders_last_30_days }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Revenue Last 30 Days</div>
+                <div style="font-size: 36px; font-weight: bold; color: #417690; margin-top: 15px;">
+                    Rs {{ order_stats.revenue_last_30_days|floatformat:2 }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Average Order Value</div>
+                <div style="font-size: 36px; font-weight: bold; color: #417690; margin-top: 15px;">
+                    Rs {{ order_stats.average_order_value|floatformat:2 }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Pending Orders</div>
+                <div style="font-size: 36px; font-weight: bold; color: #ffc107; margin-top: 15px;">
+                    {{ order_stats.pending_orders }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Confirmed Orders</div>
+                <div style="font-size: 36px; font-weight: bold; color: #28a745; margin-top: 15px;">
+                    {{ order_stats.confirmed_orders }}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Product Statistics -->
+    <div style="margin: 30px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 20px;">Product Statistics</h2>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 25px;">
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Total Products</div>
+                <div style="font-size: 36px; font-weight: bold; color: #28a745; margin-top: 15px;">
+                    {{ product_stats.total_products }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Featured Products</div>
+                <div style="font-size: 36px; font-weight: bold; color: #28a745; margin-top: 15px;">
+                    {{ product_stats.featured_products }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Low Stock</div>
+                <div style="font-size: 36px; font-weight: bold; color: #ffc107; margin-top: 15px;">
+                    {{ product_stats.low_stock }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Out of Stock</div>
+                <div style="font-size: 36px; font-weight: bold; color: #dc3545; margin-top: 15px;">
+                    {{ product_stats.out_of_stock }}
+                </div>
+            </div>
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <div style="color: #666; font-size: 16px;">Total Inventory Value</div>
+                <div style="font-size: 36px; font-weight: bold; color: #28a745; margin-top: 15px;">
+                    Rs {{ product_stats.total_inventory_value|floatformat:2 }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div style="margin: 50px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 25px;">Visual Analytics</h2>
+        
+        <!-- Revenue Trend Chart -->
+        <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 25px;">
+            <h3 style="margin-top: 0; font-size: 22px;">Revenue Trend (Last 30 Days)</h3>
+            <canvas id="revenueChart" style="max-height: 400px;"></canvas>
+        </div>
+
+        <!-- Charts Grid -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin-bottom: 25px;">
+            <!-- Order Status Distribution -->
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-size: 22px;">Order Status Distribution</h3>
+                <canvas id="statusChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <!-- Payment Methods -->
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-size: 22px;">Payment Methods</h3>
+                <canvas id="paymentChart" style="max-height: 350px;"></canvas>
+            </div>
+        </div>
+
+        <!-- Category Performance -->
+        <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-bottom: 25px;">
+            <h3 style="margin-top: 0; font-size: 22px;">Category Performance</h3>
+            <canvas id="categoryChart" style="max-height: 400px;"></canvas>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px;">
+            <!-- Gender Preference -->
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-size: 22px;">Gender Preference</h3>
+                <canvas id="genderChart" style="max-height: 350px;"></canvas>
+            </div>
+
+            <!-- Top Products -->
+            <div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; font-size: 22px;">Top Products by Revenue</h3>
+                <canvas id="topProductsChart" style="max-height: 350px;"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tables Section - Side by Side -->
+    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; margin: 50px 0;">
+        <!-- Best Sellers Table -->
+        <div>
+            <h2 style="font-size: 28px; margin-bottom: 20px;">Best Selling Products</h2>
+            <table style="width: 100%; background: white; border-radius: 12px; overflow: hidden; font-size: 16px;">
+                <thead style="background: #417690; color: white;">
+                    <tr>
+                        <th style="padding: 20px; text-align: left;">Product</th>
+                        <th style="padding: 20px; text-align: right;">Units Sold</th>
+                        <th style="padding: 20px; text-align: right;">Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in best_sellers %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 20px;">{{ item.product__name }}</td>
+                        <td style="padding: 20px; text-align: right;">{{ item.total_sold }}</td>
+                        <td style="padding: 20px; text-align: right;">Rs {{ item.revenue|floatformat:2 }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Most Favorited Products -->
+        {% if most_favorited %}
+        <div>
+            <h2 style="font-size: 28px; margin-bottom: 20px;">Most Favorited Products</h2>
+            <table style="width: 100%; background: white; border-radius: 12px; overflow: hidden; font-size: 16px;">
+                <thead style="background: #417690; color: white;">
+                    <tr>
+                        <th style="padding: 20px; text-align: left;">Product</th>
+                        <th style="padding: 20px; text-align: right;">Favorites</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in most_favorited %}
+                    <tr style="border-bottom: 1px solid #eee;">
+                        <td style="padding: 20px;">{{ item.product__name }}</td>
+                        <td style="padding: 20px; text-align: right;">{{ item.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Low Stock Alerts -->
+    {% if low_stock_products %}
+    <div style="margin: 30px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 20px;">⚠️ Low Stock Alerts</h2>
+        <table style="width: 100%; background: white; border-radius: 12px; overflow: hidden; font-size: 16px;">
+            <thead style="background: #dc3545; color: white;">
+                <tr>
+                    <th style="padding: 20px; text-align: left;">Product</th>
+                    <th style="padding: 20px; text-align: right;">Stock Remaining</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in low_stock_products %}
+                <tr style="border-bottom: 1px solid #eee;">
+                    <td style="padding: 20px;">{{ product.name }}</td>
+                    <td style="padding: 20px; text-align: right; color: {% if product.stock == 0 %}#dc3545{% else %}#ffc107{% endif %}; font-weight: bold; font-size: 18px;">
+                        {{ product.stock }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+// Chart.js default configuration
+Chart.defaults.font.family = "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif";
+Chart.defaults.plugins.legend.display = true;
+Chart.defaults.plugins.legend.position = 'bottom';
+
+// Revenue Trend Chart (Line)
+const revenueData = {{ revenue_chart_data|safe }};
+new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+        labels: revenueData.labels,
+        datasets: [{
+            label: 'Revenue (Rs)',
+            data: revenueData.data,
+            borderColor: '#417690',
+            backgroundColor: 'rgba(65, 118, 144, 0.1)',
+            tension: 0.4,
+            fill: true
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'Rs ' + value.toLocaleString();
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Order Status Chart (Doughnut)
+const statusData = {{ status_chart_data|safe }};
+new Chart(document.getElementById('statusChart'), {
+    type: 'doughnut',
+    data: {
+        labels: statusData.labels,
+        datasets: [{
+            data: statusData.data,
+            backgroundColor: [
+                '#28a745',
+                '#ffc107',
+                '#17a2b8',
+                '#dc3545',
+                '#6c757d'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true
+    }
+});
+
+// Payment Method Chart (Pie)
+const paymentData = {{ payment_chart_data|safe }};
+new Chart(document.getElementById('paymentChart'), {
+    type: 'pie',
+    data: {
+        labels: paymentData.labels,
+        datasets: [{
+            data: paymentData.data,
+            backgroundColor: [
+                '#417690',
+                '#28a745',
+                '#ffc107',
+                '#17a2b8'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true
+    }
+});
+
+// Category Performance Chart (Bar)
+const categoryData = {{ category_chart_data|safe }};
+new Chart(document.getElementById('categoryChart'), {
+    type: 'bar',
+    data: {
+        labels: categoryData.labels,
+        datasets: [{
+            label: 'Revenue (Rs)',
+            data: categoryData.data,
+            backgroundColor: '#417690'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'Rs ' + value.toLocaleString();
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Gender Preference Chart (Doughnut)
+const genderData = {{ gender_chart_data|safe }};
+new Chart(document.getElementById('genderChart'), {
+    type: 'doughnut',
+    data: {
+        labels: genderData.labels,
+        datasets: [{
+            data: genderData.data,
+            backgroundColor: [
+                '#417690',
+                '#e83e8c',
+                '#6c757d'
+            ]
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true
+    }
+});
+
+// Top Products Chart (Horizontal Bar)
+const topProductsData = {{ top_products_chart|safe }};
+new Chart(document.getElementById('topProductsChart'), {
+    type: 'bar',
+    data: {
+        labels: topProductsData.labels,
+        datasets: [{
+            label: 'Revenue (Rs)',
+            data: topProductsData.data,
+            backgroundColor: '#28a745'
+        }]
+    },
+    options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            x: {
+                beginAtZero: true,
+                ticks: {
+                    callback: function(value) {
+                        return 'Rs ' + value.toLocaleString();
+                    }
+                }
+            }
+        }
+    }
+});
+</script>
+{% endblock %}
