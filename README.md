@@ -119,6 +119,7 @@ STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 
 ```bash
 # Run database migrations
+python manage.py makemigrations
 python manage.py migrate
 
 # Load pre-seeded data to populate the database
