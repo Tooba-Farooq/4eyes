@@ -101,7 +101,7 @@ source venv/bin/activate
 # Install Python dependencies
 pip install -r requirements.txt
 
-# Create .env file in backend directory
+# Create .env file in For_eyes directory
 # Copy the content below and add your keys
 ```
 
@@ -110,6 +110,7 @@ pip install -r requirements.txt
 ```env
 
 # Stripe Keys (get from https://dashboard.stripe.com/test/apikeys)
+# leave webhook secret it will be added later
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
 STRIPE_PUBLISHABLE_KEY=pk_test_your_stripe_publishable_key
 STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
