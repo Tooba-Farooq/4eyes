@@ -30,12 +30,14 @@ const CategoryPage = () => {
 
         // Map URL category name to backend category name
         const categoryMap = {
+          "eyeglasses": "Eyeglasses",
           "eyeglasses-all": "Eyeglasses",
           "eyeglasses-men": "Eyeglasses",
           "eyeglasses-women": "Eyeglasses",
           "eyeglasses-kids": "Eyeglasses",
           "eyeglasses-best-sellers": "Eyeglasses",
           "eyeglasses-new-arrivals": "Eyeglasses",
+          "sunglasses": "Sunglasses",
           "sunglasses-all": "Sunglasses",
           "sunglasses-men": "Sunglasses",
           "sunglasses-women": "Sunglasses",
